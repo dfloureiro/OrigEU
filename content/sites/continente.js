@@ -1,0 +1,1 @@
+BuyEU.init(BuyEUSfcc.buildConfig());

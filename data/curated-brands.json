@@ -1,0 +1,2945 @@
+{
+  "schemaVersion": 1,
+  "source": "https://escolho.eu",
+  "generatedAt": "2026-08-17",
+  "rows": [
+    {
+      "category": "Alimentação",
+      "subcategory": "Restaurantes",
+      "avoid": [
+        "MacDonalds"
+      ],
+      "alternatives": [
+        {
+          "brand": "Burguer Ranch",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "H3",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Honorato",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Restaurantes",
+      "avoid": [
+        "Dominos",
+        "Papa Johns",
+        "Pizza Hut"
+      ],
+      "alternatives": [
+        {
+          "brand": "Mr.Pizza",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Telepizza",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Restaurantes",
+      "avoid": [
+        "KFC"
+      ],
+      "alternatives": [
+        {
+          "brand": "Casa dos Frangos de Moscavide",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Vira",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Restaurantes",
+      "avoid": [
+        "Starbucks",
+        "Costa Coffee"
+      ],
+      "alternatives": [
+        {
+          "brand": "Jeronymo",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Restaurantes",
+      "avoid": [
+        "Subway"
+      ],
+      "alternatives": [
+        {
+          "brand": "Companhia das Sandes",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Pans & Company",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Batatas fritas",
+      "avoid": [
+        "Lays",
+        "Pála-Pála",
+        "Ruffles"
+      ],
+      "alternatives": [
+        {
+          "brand": "Marca branca Continente/Intermarché/Lidl/Pingo Doce - produção nacional",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "A Saloinha",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Barrosã",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Dalimar",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Maria Batata",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Titi",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Extra Crocante Aldi",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Bolachas e bolos",
+      "avoid": [
+        "Chips Ahoy",
+        "Oreos",
+        "Triunfo"
+      ],
+      "alternatives": [
+        {
+          "brand": "Nacional",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Saborosa/Belgas",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Vieira Milenium",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Chiquilin",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Cuétara",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Dan Cake",
+          "countries": [
+            "Dinamarca"
+          ]
+        },
+        {
+          "brand": "Filipinos",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Gullon",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Walker's Shortbread",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Cereais",
+      "avoid": [
+        "Kellogs"
+      ],
+      "alternatives": [
+        {
+          "brand": "ChocoMax",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cookie'z Chocolate",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Nacional",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Power'z",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Starz",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cheerios",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Corn Flakes Nestlé",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Chocapic",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Cookie Crisp",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Estrelitas",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Golden Grahams",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "KitKat",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Lion",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Nesquik",
+          "countries": [
+            "Suíça"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Chocolate em pó solúvel",
+      "avoid": [
+        "Cadbury's"
+      ],
+      "alternatives": [
+        {
+          "brand": "Coqui",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Delta Cacau",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Chocolate Quente Delta",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cola-Cao",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Nesquik",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Ovomaltine",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Suchard Express",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Condimentos - Ketchup",
+      "avoid": [
+        "Heinz"
+      ],
+      "alternatives": [
+        {
+          "brand": "Guloso",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Paladin",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Calvé",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Condimentos - Maionese",
+      "avoid": [
+        "Heinz"
+      ],
+      "alternatives": [
+        {
+          "brand": "Paladin",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Vianeza",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Calvé",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Hellmann's",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Condimentos - Mostarda",
+      "avoid": [
+        "Heinz"
+      ],
+      "alternatives": [
+        {
+          "brand": "Paladin",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Savora",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Calvé",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Maille",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Skandia",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Cervejas",
+      "avoid": [
+        "Budweiser"
+      ],
+      "alternatives": [
+        {
+          "brand": "Musa",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Sagres",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Superbock",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Carlsberg",
+          "countries": [
+            "Dinamarca"
+          ]
+        },
+        {
+          "brand": "Estrella",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Guiness",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Heineken",
+          "countries": [
+            "Países Baixos"
+          ]
+        },
+        {
+          "brand": "Leffe",
+          "countries": [
+            "Bélgica"
+          ]
+        },
+        {
+          "brand": "San Miguel",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Chás",
+      "avoid": [
+        "Lipton Ice Tea"
+      ],
+      "alternatives": [
+        {
+          "brand": "Nestea",
+          "countries": [
+            "Suíça"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Colas",
+      "avoid": [
+        "Coca-Cola",
+        "Pepsi Cola"
+      ],
+      "alternatives": [
+        {
+          "brand": "Brisa",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Refrigerante com Gás Cola Continente",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Why Not - Cola",
+          "countries": [
+            "Alemanha",
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cola Guss",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Energéticas",
+      "avoid": [
+        "Monster",
+        "Powerade",
+        "Burn"
+      ],
+      "alternatives": [
+        {
+          "brand": "Guapa",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "RPower",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Brite",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Hell",
+          "countries": [
+            "Hungria"
+          ]
+        },
+        {
+          "brand": "Nocco",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Red Bull",
+          "countries": [
+            "Áustria"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Refrigerantes",
+      "avoid": [
+        "Fanta",
+        "Schweppes",
+        "7-Up",
+        "Sprite"
+      ],
+      "alternatives": [
+        {
+          "brand": "Brisa",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Kima",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Sumol",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Why Not",
+          "countries": [
+            "Alemanha",
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Sumos",
+      "avoid": [
+        "Tropicana",
+        "Minute Maid"
+      ],
+      "alternatives": [
+        {
+          "brand": "Compal",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Um Bongo",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Capri-Sun",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Trina",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Chocolates",
+      "avoid": [
+        "Cadbury",
+        "Hersheys",
+        "Milka",
+        "Toblerone",
+        "Côte d'Or"
+      ],
+      "alternatives": [
+        {
+          "brand": "Regina",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Lindt",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Godiva",
+          "countries": [
+            "Turquia"
+          ]
+        },
+        {
+          "brand": "Ritter Sport",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Chocolates",
+      "avoid": [
+        "M&Ms"
+      ],
+      "alternatives": [
+        {
+          "brand": "Jubileu",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Pintarolas",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Conguitos",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Ferrero Rocher",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Smarties",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Toffifee",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Chocolates",
+      "avoid": [
+        "Bounty",
+        "Mars",
+        "Reese's",
+        "Snikers",
+        "Twix"
+      ],
+      "alternatives": [
+        {
+          "brand": "Arcádia",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Regina",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Crunch",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Kinder",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "KitKat",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Lion",
+          "countries": [
+            "Suíça"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Pastilhas elásticas",
+      "avoid": [
+        "Orbit",
+        "Trident"
+      ],
+      "alternatives": [
+        {
+          "brand": "Gorila",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Rebuçados",
+      "avoid": [
+        "Halls",
+        "Vicks"
+      ],
+      "alternatives": [
+        {
+          "brand": "Dr. Bayard",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Smint",
+          "countries": [
+            "Itália",
+            "Holanda"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Alimentação",
+      "subcategory": "Chips",
+      "avoid": [
+        "Doritos",
+        "Cheetos",
+        "Pringles"
+      ],
+      "alternatives": [
+        {
+          "brand": "Tremoços",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Motor de pesquisa",
+      "avoid": [
+        "Google"
+      ],
+      "alternatives": [
+        {
+          "brand": "Ecosia",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Good",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Qwant",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Startpage",
+          "countries": [
+            "Holanda"
+          ]
+        },
+        {
+          "brand": "Swisscows",
+          "countries": [
+            "Suíça"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Email",
+      "avoid": [
+        "Gmail"
+      ],
+      "alternatives": [
+        {
+          "brand": "SAPO",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Eclipso",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Infomaniak",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Mailfence",
+          "countries": [
+            "Bélgica"
+          ]
+        },
+        {
+          "brand": "Mailo",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Proton",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Tuta",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Armazenamento",
+      "avoid": [
+        "Google Drive"
+      ],
+      "alternatives": [
+        {
+          "brand": "Ver categoria Clouds e Envio de Ficheiros",
+          "countries": []
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Mapas",
+      "avoid": [
+        "Google Maps e Waze"
+      ],
+      "alternatives": [
+        {
+          "brand": "HereWeGo",
+          "countries": [
+            "Holanda"
+          ]
+        },
+        {
+          "brand": "Mapy",
+          "countries": [
+            "Chéquia"
+          ]
+        },
+        {
+          "brand": "OpenStreetMap",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Navegador",
+      "avoid": [
+        "Google Chrome"
+      ],
+      "alternatives": [
+        {
+          "brand": "Mullvad",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Vivaldi",
+          "countries": [
+            "Noruega"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Tradutor",
+      "avoid": [
+        "Google Translator"
+      ],
+      "alternatives": [
+        {
+          "brand": "Apertium",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Deepl",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Libre Translate",
+          "countries": []
+        },
+        {
+          "brand": "Lingva Translate",
+          "countries": []
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Calendário",
+      "avoid": [
+        "Google Calendar"
+      ],
+      "alternatives": [
+        {
+          "brand": "Calendar",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Fruux",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Proton Calendar",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Tuta Calendar",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Documentos",
+      "avoid": [
+        "Google Docs"
+      ],
+      "alternatives": [
+        {
+          "brand": "Collabora",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "NextCloud",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Nuclino",
+          "countries": [
+            "Letónia"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Vídeo",
+      "avoid": [
+        "Youtube"
+      ],
+      "alternatives": [
+        {
+          "brand": "DailyMotion",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Redes sociais",
+      "avoid": [
+        "Twitter-X / Threads"
+      ],
+      "alternatives": [
+        {
+          "brand": "Mastodon",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Pleroma",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Redes sociais",
+      "avoid": [
+        "Instagram"
+      ],
+      "alternatives": [
+        {
+          "brand": "Pixelfed",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Redes sociais",
+      "avoid": [
+        "Linkedin"
+      ],
+      "alternatives": [
+        {
+          "brand": "Bark",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "LHH",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Xing",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Gaming",
+      "avoid": [
+        "Epic Games",
+        "Steam"
+      ],
+      "alternatives": [
+        {
+          "brand": "Good Old Games",
+          "countries": [
+            "Polónia"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Conversação/Messaging",
+      "avoid": [
+        "WhatsApp",
+        "Facebook Messenger",
+        "Telegram"
+      ],
+      "alternatives": [
+        {
+          "brand": "Ginlo",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Olvid",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Skred",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Teleguard",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Threema",
+          "countries": [
+            "Suíça"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Conversação/Messaging",
+      "avoid": [
+        "Google Meet",
+        "Teams",
+        "Zoom"
+      ],
+      "alternatives": [
+        {
+          "brand": "Alfaview",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Digital Samba",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Hostpoint",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Infomaniak Kmeet",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "OpenTalk",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Sites/Lojas/E-commerce",
+      "avoid": [
+        "Etsy",
+        "Square Online",
+        "Squarespace",
+        "WIX"
+      ],
+      "alternatives": [
+        {
+          "brand": "Jimdo",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Registrars/Alojamento",
+      "avoid": [
+        "GoDaddy",
+        "Namecheap",
+        "Google",
+        "Network Solutions",
+        "Namebright"
+      ],
+      "alternatives": [
+        {
+          "brand": "Webhs",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Webtuga",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Aruba",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Blacknight",
+          "countries": [
+            "Irlanda"
+          ]
+        },
+        {
+          "brand": "Combell",
+          "countries": [
+            "Bélgica"
+          ]
+        },
+        {
+          "brand": "Gandi Net",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Hostinger",
+          "countries": [
+            "Lituânia"
+          ]
+        },
+        {
+          "brand": "Hostpoint",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Infomaniak",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "INWX",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Ionos",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "OpenProvider",
+          "countries": [
+            "Holanda"
+          ]
+        },
+        {
+          "brand": "OVH Cloud",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Netim",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "United Domains",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Envio de ficheiros",
+      "avoid": [
+        "WeTransfer"
+      ],
+      "alternatives": [
+        {
+          "brand": "SAPO Transfer",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "4Shared",
+          "countries": [
+            "Ucrânia"
+          ]
+        },
+        {
+          "brand": "Smash",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "SwissTransfer",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "TransferNow",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Digital",
+      "subcategory": "Clouds",
+      "avoid": [
+        "DropBox",
+        "Google Drive",
+        "iCloud",
+        "One Drive"
+      ],
+      "alternatives": [
+        {
+          "brand": "MEO Cloud",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cozy",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Filen",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Internext",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Jottacloud",
+          "countries": [
+            "Noruega"
+          ]
+        },
+        {
+          "brand": "KDrive",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Koofr",
+          "countries": [
+            "Eslovénia"
+          ]
+        },
+        {
+          "brand": "NextCloud",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "PC Cloud",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "ProtonDrive",
+          "countries": [
+            "Suíça"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Entretenimento e cultura",
+      "subcategory": "Streaming vídeo",
+      "avoid": [
+        "Amazon Prime",
+        "Apple TV",
+        "Dazn",
+        "Disney Plus",
+        "HBO/Max",
+        "Netflix",
+        "Sky Showtime"
+      ],
+      "alternatives": [
+        {
+          "brand": "Film Twist",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Filmin",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Mubi",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Entretenimento e cultura",
+      "subcategory": "Streaming áudio",
+      "avoid": [
+        "Apple Music",
+        "YouTube Music"
+      ],
+      "alternatives": [
+        {
+          "brand": "Qobuz",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "SoundCloud",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Spotify",
+          "countries": [
+            "Suécia"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Entretenimento e cultura",
+      "subcategory": "Livros",
+      "avoid": [
+        "Amazon (Livros)"
+      ],
+      "alternatives": [
+        {
+          "brand": "Almedina",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Bertrand",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Wook",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Awsome Books",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Fnac",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Libristo",
+          "countries": [
+            "Chéquia"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Geral",
+      "avoid": [
+        "Marcas próprias de supermercado"
+      ],
+      "alternatives": [
+        {
+          "brand": "Aldi",
+          "countries": []
+        },
+        {
+          "brand": "Auchan",
+          "countries": []
+        },
+        {
+          "brand": "Continente",
+          "countries": []
+        },
+        {
+          "brand": "El Corte Inglés",
+          "countries": []
+        },
+        {
+          "brand": "Lidl",
+          "countries": []
+        },
+        {
+          "brand": "Mercadona",
+          "countries": []
+        },
+        {
+          "brand": "Pingo Doce",
+          "countries": []
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cabelo",
+      "avoid": [
+        "H&S"
+      ],
+      "alternatives": [
+        {
+          "brand": "Linic",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cabelo",
+      "avoid": [
+        "Pantene"
+      ],
+      "alternatives": [
+        {
+          "brand": "Schwarzkopf",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Tresemmé",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Desodorizantes",
+      "avoid": [
+        "Old Spice"
+      ],
+      "alternatives": [
+        {
+          "brand": "Axe",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Desodorizantes",
+      "avoid": [
+        "Sanex"
+      ],
+      "alternatives": [
+        {
+          "brand": "Feno de Portugal",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Dove",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Narta",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Nívea",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Gel de banho",
+      "avoid": [
+        "Palmolive"
+      ],
+      "alternatives": [
+        {
+          "brand": "Feno de Portugal",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Dove",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Nivea",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Higiene oral",
+      "avoid": [
+        "Colgate",
+        "OralB",
+        "Pepsodent"
+      ],
+      "alternatives": [
+        {
+          "brand": "Pasta dentífrica Couto",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Aquafresh",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Bexident",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Fluocaril",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Jordan Oral Care",
+          "countries": [
+            "Noruega"
+          ]
+        },
+        {
+          "brand": "Parodontax",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Sensodyne",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Lâminas",
+      "avoid": [
+        "Gilette",
+        "Wilkinson"
+      ],
+      "alternatives": [
+        {
+          "brand": "Bic",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Papel higiénico",
+      "avoid": [
+        "Scotex"
+      ],
+      "alternatives": [
+        {
+          "brand": "Renova",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Pele",
+      "avoid": [
+        "Dodot (toalhitas)"
+      ],
+      "alternatives": [
+        {
+          "brand": "Renova",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Pele",
+      "avoid": [
+        "Óleo Johnson"
+      ],
+      "alternatives": [
+        {
+          "brand": "Dove",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Pensos e tampões",
+      "avoid": [
+        "Ausónia",
+        "Evax",
+        "o.b.",
+        "Tampax"
+      ],
+      "alternatives": [
+        {
+          "brand": "Renova",
+          "countries": [
+            "Portugal"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cosmética",
+      "avoid": [
+        "Clinique"
+      ],
+      "alternatives": [
+        {
+          "brand": "Vichy",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cosmética",
+      "avoid": [
+        "Estée Lauder Companies"
+      ],
+      "alternatives": [
+        {
+          "brand": "Benamôr",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Chanel",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Dior",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Yves Saint Laurent",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cosmética",
+      "avoid": [
+        "Kiehl's"
+      ],
+      "alternatives": [
+        {
+          "brand": "Caudalie",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Freshly Cosmetics",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "ISDIN",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cosmética",
+      "avoid": [
+        "Mary Kay"
+      ],
+      "alternatives": [
+        {
+          "brand": "Oriflame",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Yves Rocher",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cosmética",
+      "avoid": [
+        "Kylie Cosmetics",
+        "MAC"
+      ],
+      "alternatives": [
+        {
+          "brand": "Kiko Milano",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "L'Oréal",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Maybeline",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Higiene pessoal & Cosmética",
+      "subcategory": "Cosmética",
+      "avoid": [
+        "Revlon"
+      ],
+      "alternatives": [
+        {
+          "brand": "Sephora",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Limpeza",
+      "subcategory": "Geral",
+      "avoid": [
+        "Marcas próprias de supermercado"
+      ],
+      "alternatives": [
+        {
+          "brand": "Aldi",
+          "countries": []
+        },
+        {
+          "brand": "Auchan",
+          "countries": []
+        },
+        {
+          "brand": "Continente",
+          "countries": []
+        },
+        {
+          "brand": "El Corte Inglés",
+          "countries": []
+        },
+        {
+          "brand": "Lidl",
+          "countries": []
+        },
+        {
+          "brand": "Mercadona",
+          "countries": []
+        },
+        {
+          "brand": "Pingo Doce",
+          "countries": []
+        }
+      ]
+    },
+    {
+      "category": "Limpeza",
+      "subcategory": "Loiça (manual)",
+      "avoid": [
+        "Fairy"
+      ],
+      "alternatives": [
+        {
+          "brand": "EcoX",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cif",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Limpeza",
+      "subcategory": "Loiça (máquina)",
+      "avoid": [
+        "Fairy"
+      ],
+      "alternatives": [
+        {
+          "brand": "EcoX",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Finish",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Limpeza",
+      "subcategory": "Roupa",
+      "avoid": [
+        "Ariel (A+)",
+        "Woolite"
+      ],
+      "alternatives": [
+        {
+          "brand": "EcoX",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Inokem",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Mistolin",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Skip",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Persil",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Xau",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Limpeza",
+      "subcategory": "Roupa",
+      "avoid": [
+        "Lenor Unstopables"
+      ],
+      "alternatives": [
+        {
+          "brand": "Comfort",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Limpeza",
+      "subcategory": "Superfícies",
+      "avoid": [
+        "Ajax",
+        "Fabuloso"
+      ],
+      "alternatives": [
+        {
+          "brand": "EcoX",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Inokem",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Mistolin",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Cif",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Cillit Bang",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Neoblanc",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Sanytol",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Sonasol",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Vanish",
+          "countries": [
+            "Reino Unido"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Têxtil e calçado",
+      "subcategory": "Desportivo",
+      "avoid": [
+        "Billabong",
+        "Columbia",
+        "Converse",
+        "DC",
+        "Dockers",
+        "Element",
+        "Hoka",
+        "Merrel",
+        "New Balance",
+        "Nike",
+        "Quicksilver",
+        "Reebok",
+        "Skechers",
+        "Timberland",
+        "The North Face",
+        "Under Armour",
+        "Vans"
+      ],
+      "alternatives": [
+        {
+          "brand": "Quebramar",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Sanjo",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Adidas",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Axel Arigato",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Golden Goose",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Joma",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Kappa",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Lacoste",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Le Coq Sportif",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Puma",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Veja",
+          "countries": [
+            "França"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Têxtil e calçado",
+      "subcategory": "Casual",
+      "avoid": [
+        "Gap",
+        "Guess",
+        "Levis"
+      ],
+      "alternatives": [
+        {
+          "brand": "Ferrache",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Giovanni Galli",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Lanidor",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Lion of Porches",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Lois",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Sacoor Brothers",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Salsa",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Benetton",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Bimba Y Lola",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Bershka",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Calzedonia",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Desigual",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Diesel",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "GANT",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "H&M",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Intimissimi",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Mango",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Massimo Dutti",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Oysho",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Primark",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Pull&Bear",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Sisley",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Springfield",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Zara",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Têxtil e calçado",
+      "subcategory": "Designers de moda",
+      "avoid": [
+        "Calvin Klein",
+        "DKNY",
+        "Marc Jacobs",
+        "Michael Kors",
+        "Ralph Lauren",
+        "Tom Ford",
+        "Tommy Hilfiger"
+      ],
+      "alternatives": [
+        {
+          "brand": "Decenio",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Adolfo Domínguez",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Armani",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Burberry",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Chanel",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Christian Lacroix",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "COS",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Dior",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Ermenegildo Zegna",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Fendi",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Gucci",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Hugo Boss",
+          "countries": [
+            "Alemanha"
+          ]
+        },
+        {
+          "brand": "Karl Lagerfeld",
+          "countries": [
+            "Holanda"
+          ]
+        },
+        {
+          "brand": "Loewe",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Louis Vuitton",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Max Mara",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Prada",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "Purificacion Garcia",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Scalpers",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Têxtil e calçado",
+      "subcategory": "Criança",
+      "avoid": [
+        "Gap Kids",
+        "OshKosh"
+      ],
+      "alternatives": [
+        {
+          "brand": "Zippy",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "C&A",
+          "countries": [
+            "Suíça"
+          ]
+        },
+        {
+          "brand": "Chicco",
+          "countries": [
+            "Itália"
+          ]
+        },
+        {
+          "brand": "DPAM - Du Pareil au Même",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "H&M",
+          "countries": [
+            "Suécia"
+          ]
+        },
+        {
+          "brand": "Kiabi",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Primark",
+          "countries": [
+            "Reino Unido"
+          ]
+        },
+        {
+          "brand": "Zara Kids",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Transportes",
+      "avoid": [
+        "Uber"
+      ],
+      "alternatives": [
+        {
+          "brand": "Táxi",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Bolt",
+          "countries": [
+            "Estónia"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Aluguer de carros",
+      "avoid": [
+        "Avis Budget",
+        "Enterprise",
+        "Hertz"
+      ],
+      "alternatives": [
+        {
+          "brand": "Cael Rent a Car",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Guerin",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Centauro",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Europcar",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Sixt",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Entregas",
+      "avoid": [
+        "DHL",
+        "Fedex",
+        "UPS"
+      ],
+      "alternatives": [
+        {
+          "brand": "CTT",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "DPD",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Eurosender",
+          "countries": [
+            "Eslovénia"
+          ]
+        },
+        {
+          "brand": "Nacex",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Entregas",
+      "avoid": [
+        "UberEats"
+      ],
+      "alternatives": [
+        {
+          "brand": "Eat-Tasty",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Bolt Food",
+          "countries": [
+            "Estónia"
+          ]
+        },
+        {
+          "brand": "Glovo",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Cadeias de hotéis",
+      "avoid": [
+        "Best Western Hotels",
+        "Hilton",
+        "Hyatt Hotels",
+        "InterContinental Hotels",
+        "Marriott"
+      ],
+      "alternatives": [
+        {
+          "brand": "Pestana Hotel",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Accor Group",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Barceló Hotel",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Meliá Hotels",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "NH Hotel Group",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "Riu Hotels",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Companhias aéreas",
+      "avoid": [
+        "American Airlines",
+        "Delta Airlines",
+        "United",
+        "JetBlue"
+      ],
+      "alternatives": [
+        {
+          "brand": "SATA",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "TAP",
+          "countries": [
+            "Portugal"
+          ]
+        },
+        {
+          "brand": "Air France",
+          "countries": [
+            "França"
+          ]
+        },
+        {
+          "brand": "Ibéria",
+          "countries": [
+            "Espanha"
+          ]
+        },
+        {
+          "brand": "KLM",
+          "countries": [
+            "Holanda"
+          ]
+        },
+        {
+          "brand": "Lufthansa",
+          "countries": [
+            "Alemanha"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Transportes e entregas, Turismo",
+      "subcategory": "Reservas (viagens/alojamento)",
+      "avoid": [
+        "Airbnb",
+        "Booking",
+        "Expedia",
+        "Hotels.com",
+        "Kayak",
+        "Trivago"
+      ],
+      "alternatives": [
+        {
+          "brand": "eDreams",
+          "countries": [
+            "Espanha"
+          ]
+        }
+      ]
+    }
+  ]
+}
