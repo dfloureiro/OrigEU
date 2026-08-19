@@ -119,7 +119,9 @@ current markup (retailers restyle their sites over time).
 ## Project layout
 
 ```
-manifest.json
+manifest.json                    # Chrome/Chromium MV3 manifest
+manifest.firefox.json            # Firefox MV3 manifest — background.scripts instead of service_worker,
+                                  # plus browser_specific_settings; kept in sync with manifest.json by hand
 _locales/pt_PT/messages.json, _locales/en/messages.json   # chrome.i18n UI text, matched to browser language
 background/background.js         # service worker: matches the own brand database + caching + clear-cache action
 lib/config.example.js            # template for lib/config.js (gitignored) — your own backend URL, never committed
@@ -148,11 +150,14 @@ backend/                         # own brand database: Cloudflare Workers + D1 +
 - **New supermarket site**: add a `content/sites/<site>.js` adapter (reuse
   `sfcc-common.js` if the site also runs Salesforce Commerce Cloud), and
   register it in `manifest.json`'s `content_scripts`.
-- **Firefox**: the codebase avoids MV3-only APIs beyond the manifest and
-  service worker background, so porting mainly means adding a
-  `manifest.firefox.json` (Firefox still supports MV2 background scripts,
-  or MV3 with `background.scripts` instead of `service_worker`) — the
-  `lib/` and `content/` code should work unchanged.
+- **Firefox**: already supported, via `manifest.firefox.json` — Firefox's
+  MV3 implementation doesn't use `background.service_worker` and needs
+  `background.scripts` instead, which Chrome's MV3 validator rejects
+  outright, so one shared manifest can't satisfy both. Everything else
+  (`lib/`, `content/`) is unchanged: the codebase's only extension-API
+  surface — `chrome.runtime`, `chrome.storage`, `chrome.i18n` — works
+  identically in Firefox via its `chrome.*` compatibility shim. See
+  `README.md`'s "Setting it up yourself" for load/build steps per browser.
 
 ## Known limitations (v0.1)
 

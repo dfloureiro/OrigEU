@@ -59,16 +59,29 @@ Chrome (or any Chromium-based browser):
 
 Firefox:
 - Clone or download this repository
+- Firefox's loader expects a file literally named `manifest.json`, and
+  Chrome/Firefox need slightly different manifests (see note below) —
+  copy the Firefox one into place: `cp manifest.firefox.json manifest.json`
+  (do this in a separate clone/copy of the repo if you also want the
+  Chrome version loaded from the same machine)
 - Open `about:debugging#/runtime/this-firefox`
-- Click "Load Temporary Add-on…" and select `manifest.json` inside the
-  folder you cloned (temporary add-ons unload when Firefox restarts —
-  for a permanent local install, package it with
+- Click "Load Temporary Add-on…" and select the `manifest.json` you just
+  copied (temporary add-ons unload when Firefox restarts — for a
+  permanent local install, package it with
   [`web-ext`](https://extensionworkshop.com/documentation/develop/web-ext-command-reference/)
   and self-sign it, or submit it to
   [addons.mozilla.org](https://addons.mozilla.org))
 
 Then visit continente.pt, auchan.pt or pingodoce.pt and search for a
 product.
+
+> **Why two manifests?** Chrome's Manifest V3 validator rejects
+> `background.scripts` outright, while Firefox's Manifest V3 support
+> doesn't use `background.service_worker` and needs `scripts` instead —
+> there's no single `background` block that satisfies both. `manifest.json`
+> is the Chrome version; `manifest.firefox.json` is Firefox's. They're kept
+> in sync by hand, so if you change permissions, version, or anything else
+> in one, mirror it in the other.
 
 At this point every product will show "unknown" — that's expected, there's
 no database connected yet.
