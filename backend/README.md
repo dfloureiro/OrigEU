@@ -16,7 +16,7 @@ database:
     click-to-suggest form, written only to a separate `pending_brands`
     queue (`backend/d1/migrations/0002_pending_brands.sql`), never to the
     live `brands` table. Reviewed and promoted into a real brand from the
-    backoffice's "Sugestões pendentes" page. Rate-limited per IP (5/hour,
+    backoffice's "Sugestões pendentes" page. Rate-limited per IP (5/minute,
     via the `SUGGESTION_RATE_LIMIT` KV namespace) since it's the one
     unauthenticated write endpoint — a coarse deterrent against scripted
     spam into the pending queue, not a hard guarantee.

@@ -22,7 +22,7 @@ const EU_STATUS_CACHE_TTL_SECONDS = 60 * 60;
 // consistent/atomic, so this is a best-effort spam deterrent, not a hard
 // guarantee under concurrent requests from the same IP — fine for this
 // purpose since the goal is throttling scripted abuse, not precision.
-const SUGGESTION_RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
+const SUGGESTION_RATE_LIMIT_WINDOW_SECONDS = 60;
 const SUGGESTION_RATE_LIMIT_MAX = 5;
 
 async function cachedJson(request, ctx, ttlSeconds, compute) {
