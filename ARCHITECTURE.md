@@ -131,7 +131,7 @@ lib/text-match.js                # accent-insensitive word-boundary matching (us
 lib/remote-dataset.js            # cache/remote-fetch/bundled-fallback loader (used by own-brands.js)
 lib/eu-decision.js               # translates an own-brands.js match into the badge's data shape
 lib/cache.js                     # chrome.storage.local cache with TTL + clear-all
-lib/settings.js                  # badge on/off preference (read by popup.js)
+lib/settings.js                  # badge on/off, detail style, hide-unknown preferences (read by popup.js)
 data/own-brands.json             # bundled empty fallback for the own database
 data/eu-status.json              # bundled EU-27 + EFTA-4 fallback for lib/eu-status.js
 popup/popup.html, popup.js       # toolbar popup: show/hide the badge, clear cache

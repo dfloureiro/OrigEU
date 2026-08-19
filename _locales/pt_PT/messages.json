@@ -12,6 +12,9 @@
   "popupToggleEu": {
     "message": "🇪🇺 Mostrar selo de origem nos produtos"
   },
+  "popupToggleHideUnknown": {
+    "message": "❓ Ocultar selos de origem desconhecida"
+  },
   "popupDetailStyleLabel": {
     "message": "Estilo do selo"
   },

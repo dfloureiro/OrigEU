@@ -20,6 +20,15 @@ async function init() {
     });
   }
 
+  // Not in KINDS: unlike "eu" (default true, hidden only when explicitly
+  // false), this defaults to false and hides only when explicitly true —
+  // opposite polarity, so it needs its own checked/change wiring.
+  const hideUnknownEl = document.getElementById('hideUnknown');
+  hideUnknownEl.checked = settings.hideUnknown === true;
+  hideUnknownEl.addEventListener('change', () => {
+    setSettings({ hideUnknown: hideUnknownEl.checked });
+  });
+
   const detailSelect = document.getElementById('detail');
   detailSelect.value = settings.detail === 'short' ? 'short' : 'long';
   detailSelect.addEventListener('change', () => {

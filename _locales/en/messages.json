@@ -12,6 +12,9 @@
   "popupToggleEu": {
     "message": "🇪🇺 Show origin badge on products"
   },
+  "popupToggleHideUnknown": {
+    "message": "❓ Hide badges for unknown origin"
+  },
   "popupDetailStyleLabel": {
     "message": "Badge style"
   },

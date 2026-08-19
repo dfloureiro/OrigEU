@@ -6,8 +6,9 @@
   // Mirrors lib/settings.js — duplicated here because content scripts can't
   // use ES module imports the way the background/popup scripts do.
   const SETTINGS_KEY = 'origeu_settings';
-  const DEFAULT_SETTINGS = { eu: true, detail: 'long' };
+  const DEFAULT_SETTINGS = { eu: true, detail: 'long', hideUnknown: false };
   const KIND_CLASS = { eu: 'origeu-pill--kind-eu' };
+  const UNKNOWN_CLASS = 'origeu-pill--eu-unknown';
   let currentSettings = { ...DEFAULT_SETTINGS };
 
   // Country code -> label/flag translation lives in content/countries.js
@@ -39,6 +40,14 @@
       const show = currentSettings[kind] !== false;
       document.querySelectorAll(`.${cls}`).forEach((el) => {
         el.style.display = show ? '' : 'none';
+      });
+    }
+    // Unknown-origin badges have their own independent toggle, layered on
+    // top of the main "eu" kind toggle above — skip if that already hid
+    // everything, so re-enabling it doesn't get overridden back to hidden.
+    if (currentSettings.eu !== false) {
+      document.querySelectorAll(`.${UNKNOWN_CLASS}`).forEach((el) => {
+        el.style.display = currentSettings.hideUnknown ? 'none' : '';
       });
     }
   }
@@ -122,6 +131,7 @@
     textEl.textContent = text;
     el.appendChild(textEl);
     if (kind && currentSettings[kind] === false) el.style.display = 'none';
+    if (className === UNKNOWN_CLASS && currentSettings.hideUnknown) el.style.display = 'none';
     if (tooltipText) {
       el.setAttribute('data-origeu-tip', tooltipText);
       el.setAttribute('aria-label', tooltipText);
@@ -211,7 +221,7 @@
         ? chrome.i18n.getMessage('tooltipNonEuCountry', [label])
         : chrome.i18n.getMessage('tooltipNonEuGeneric');
     } else {
-      className = 'origeu-pill--eu-unknown';
+      className = UNKNOWN_CLASS;
       tooltip = chrome.i18n.getMessage('tooltipUnknown');
     }
 
