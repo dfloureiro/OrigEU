@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OrigEU — Brands</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header>
+    <h1>OrigEU — Brand database</h1>
+    <div>
+      <a href="eu-status">EU/EFTA status</a>
+      &nbsp;&nbsp;
+      <a href="pending">Pending suggestions</a>
+      &nbsp;&nbsp;
+      <a class="button" href="brand-form">+ New brand</a>
+    </div>
+  </header>
+  <input id="search" type="search" placeholder="Search by name, alias or id…">
+  <label class="filter"><input type="checkbox" id="showInactive"> show inactive</label>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Countries</th><th>Updated</th><th>Active</th><th></th></tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

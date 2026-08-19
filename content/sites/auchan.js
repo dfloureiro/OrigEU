@@ -1,1 +1,1 @@
-BuyEU.init(BuyEUSfcc.buildConfig());
+OrigEU.init(OrigEUSfcc.buildConfig());

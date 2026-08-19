@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OrigEU — EU/EFTA status</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header>
+    <h1>EU / EFTA status by country</h1>
+    <a href="/">← back</a>
+  </header>
+  <p class="hint">Used by the extension to classify the country codes in
+    each brand's "Countries" as EU, EFTA, or neither — any code not listed
+    here shows as "outside the EU". Changes here don't need a new extension
+    release (just up to 24h of cache, at most).</p>
+
+  <form id="addForm" class="inline-form">
+    <input name="countryCode" id="addCountryCode" required autocomplete="off" placeholder="ISO code or country name" style="width: 160px; flex: 0 0 auto;">
+    <select name="status">
+      <option value="eu">EU</option>
+      <option value="efta">EFTA</option>
+    </select>
+    <button type="submit">+ Add</button>
+  </form>
+  <div id="addErrors" class="errors"></div>
+
+  <table>
+    <thead>
+      <tr><th>Country</th><th>Code</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

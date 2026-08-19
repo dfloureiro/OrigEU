@@ -1,0 +1,23 @@
+{
+  "name": "origeu-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-17",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "origeu-brands",
+      // Filled in automatically by `wrangler d1 create origeu-brands --update-config`
+      // (see backend/README.md) — replace this placeholder with your own.
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "migrations_dir": "../d1/migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SUGGESTION_RATE_LIMIT",
+      // Filled in automatically by `wrangler kv namespace create SUGGESTION_RATE_LIMIT --update-config`
+      // (see backend/README.md) — replace this placeholder with your own.
+      "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+    }
+  ]
+}

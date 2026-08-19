@@ -17,16 +17,21 @@
     return el && el.textContent ? el.textContent.trim() : '';
   }
 
-  function nearestPid(el) {
-    const withPid = el.matches('[data-pid]') ? el : el.querySelector('[data-pid]');
-    const pid = withPid && withPid.getAttribute('data-pid');
-    return BuyEU.looksLikeBarcode(pid) ? pid.trim() : null;
-  }
-
   function buildConfig(overrides = {}) {
     const cardSelector = overrides.cardSelector || '.product-tile, [data-pid].product, .product-grid-tile';
     const nameSelectors = overrides.nameSelectors ||
       ['.pdp-link a', '.pdp-link', '.product-name a', '.product-name', 'a.link', 'h2', 'h3'];
+    // continente.pt's own SFCC customization renames the SFRA `.tile-body`
+    // class to `.ct-tile-body` — kept as a fallback alongside the generic
+    // name (not a replacement) so a site that does use the stock SFRA class
+    // still works.
+    const tileBodySelector = overrides.tileBodySelector || '.tile-body, .ct-tile-body';
+    // Optional: a selector for an element the badge should be inserted
+    // *before*, within the inject target — e.g. continente.pt's "add to
+    // cart" button sits last in the tile body, so appending (the default)
+    // puts the badge below it instead of in the more natural spot right
+    // after the price. null means "append at the end", same as before.
+    const insertBeforeSelector = overrides.insertBeforeSelector || null;
     const pdpNameSelectors = overrides.pdpNameSelectors ||
       ['.product-detail h1.product-name', 'h1.product-name', '.product-detail h1', 'h1'];
     const pdpContainerSelector = overrides.pdpContainerSelector || '.product-detail';
@@ -34,17 +39,19 @@
     return {
       listing: {
         cardSelector,
-        getIdentity(card) {
-          const barcode = nearestPid(card);
-          let name = null;
+        getName(card) {
           for (const sel of nameSelectors) {
             const el = card.querySelector(sel);
-            if (el && textOf(el)) { name = textOf(el); break; }
+            if (el && textOf(el)) return textOf(el);
           }
-          return { barcode, name };
+          return null;
         },
         getInjectTarget(card) {
-          return card.querySelector('.tile-body') || card;
+          return card.querySelector(tileBodySelector) || card;
+        },
+        getInjectBefore(card, target) {
+          if (!insertBeforeSelector) return null;
+          return target.querySelector(insertBeforeSelector) || null;
         }
       },
       product: {
@@ -52,17 +59,12 @@
           return Boolean(document.querySelector(pdpContainerSelector) &&
             pdpNameSelectors.some((sel) => document.querySelector(sel)));
         },
-        getProductIdentity() {
-          const jsonLdBarcode = BuyEU.findJsonLdBarcode(document);
-          const container = document.querySelector(pdpContainerSelector);
-          const pidBarcode = container ? nearestPid(container) : null;
-          const barcode = jsonLdBarcode || pidBarcode;
-          let name = null;
+        getProductName() {
           for (const sel of pdpNameSelectors) {
             const el = document.querySelector(sel);
-            if (el && textOf(el)) { name = textOf(el); break; }
+            if (el && textOf(el)) return textOf(el);
           }
-          return { barcode, name };
+          return null;
         },
         getProductInjectTarget() {
           let h1 = null;
@@ -71,10 +73,10 @@
             if (h1) break;
           }
           if (!h1) return null;
-          let anchor = h1.parentElement && h1.parentElement.querySelector(':scope > .buyeu-anchor');
+          let anchor = h1.parentElement && h1.parentElement.querySelector(':scope > .origeu-anchor');
           if (!anchor) {
             anchor = document.createElement('div');
-            anchor.className = 'buyeu-anchor';
+            anchor.className = 'origeu-anchor';
             h1.insertAdjacentElement('afterend', anchor);
           }
           return anchor;
@@ -83,5 +85,5 @@
     };
   }
 
-  window.BuyEUSfcc = { buildConfig };
+  window.OrigEUSfcc = { buildConfig };
 })();

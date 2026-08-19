@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OrigEU — Brand</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header>
+    <h1 id="formTitle">New brand</h1>
+    <a href="/">← back</a>
+  </header>
+  <form id="brandForm">
+    <label>id (slug)
+      <input id="id" name="id" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="ritter-sport">
+    </label>
+    <label>Name
+      <input name="name" required>
+    </label>
+    <label>Aliases (comma-separated — alternative names used on shelves)
+      <input name="aliases" placeholder="Ritter, Ritter Sport Schokolade">
+    </label>
+    <label>Countries (comma-separated), facts only, no need to indicate EU/EFTA here
+      <input name="countries" id="countriesInput" autocomplete="off" placeholder="Portugal, Germany, USA…">
+      <small>ISO code (e.g. "PT") or country name (e.g. "Portugal") — either
+        works, the code gets stored and the confirmation shows underneath.
+        EU and EFTA (🇨🇭🇳🇴🇮🇸🇱🇮) are identified automatically by the
+        extension from the code, editable in "EU/EFTA status"; any other
+        code shows as "outside the EU" (🌍).</small>
+    </label>
+    <label>Source (citation URL for the origin)
+      <input name="source" type="url" placeholder="https://...">
+    </label>
+    <label>Notes (EN)
+      <textarea name="notesEn" rows="3"></textarea>
+    </label>
+    <label>Notes (PT)
+      <textarea name="notesPt" rows="3"></textarea>
+    </label>
+    <label class="checkbox"><input type="checkbox" name="active" checked> active</label>
+    <div id="errors" class="errors"></div>
+    <button type="submit">Save</button>
+  </form>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

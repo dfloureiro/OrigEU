@@ -1,86 +1,62 @@
-// Best-effort generic adapter for pingodoce.pt.
+// pingodoce.pt runs on the same platform as continente.pt/auchan.pt
+// (Salesforce Commerce Cloud / SFRA) — confirmed via its Demandware session
+// cookies (dwanonymous_, dwsid) and its search controller URL
+// (/on/demandware.store/Sites-pingo-doce-Site/default/Search-Show). This
+// couldn't be confirmed earlier in the project (the site blocks
+// non-browser requests without a real User-Agent), so it originally shipped
+// with a from-scratch, unverified "best effort" adapter that didn't match
+// anything real on the site — see git history.
 //
-// Unlike continente.pt and auchan.pt, this site's platform could not be
-// fingerprinted automatically (it returns 403 to non-browser requests), so
-// these selectors are educated guesses based on common patterns rather than
-// a confirmed DOM structure. If badges don't appear:
-//   1. Open a search results page and a product page on pingodoce.pt
-//   2. Inspect a product card / the product title in DevTools
-//   3. Update CARD_SELECTORS / NAME_SELECTORS / PDP_NAME_SELECTORS below
-//      to match the real class names or data-testid attributes.
-(function () {
-  const CARD_SELECTORS = [
-    '[data-testid*="product-card"]',
-    '[data-testid*="product-tile"]',
-    '.product-card',
-    '.product-tile',
-    'article[class*="product"]',
-    'li[class*="product"]'
-  ].join(', ');
+// Verified against real fetched listing/PDP pages: the PDP already matches
+// sfcc-common.js's stock SFRA selectors as-is (.product-detail,
+// h1.product-name). The listing needs a name-selector override — the
+// product name sits in `.product-name-link a` rather than any of the
+// stock name selectors (tileBodySelector doesn't need one: getInjectTarget
+// is replaced below instead of using it, see that comment for why).
+const config = OrigEUSfcc.buildConfig({
+  nameSelectors: ['.product-name-link a', '.pdp-link a', '.pdp-link', '.product-name a', '.product-name', 'a.link', 'h2', 'h3']
+});
 
-  const NAME_SELECTORS = [
-    '[data-testid*="product-name"]',
-    '[data-testid*="title"]',
-    '.product-name',
-    '.product-title',
-    'h2', 'h3'
-  ];
+// Unlike continente.pt/auchan.pt, Pingo Doce renders the brand in its own
+// element (listing: .product-brand-name; PDP: h1.product-brand),
+// completely separate from the product name/title — e.g. a listing tile's
+// name is just "Cerveja com Álcool Mini Pack 30" with "Sagres" only
+// appearing in that separate element. Since matching is word-boundary
+// search over the product name (lib/text-match.js), a brand that never
+// appears in the name text can never match — every such product showed as
+// "unknown" regardless of whether it was actually in the database. Folding
+// the brand text into the searched name fixes that.
+function withBrand(name, brandText) {
+  const brand = brandText && brandText.trim();
+  return brand ? `${brand} ${name || ''}`.trim() : name;
+}
 
-  const PDP_NAME_SELECTORS = [
-    'h1[data-testid*="product-name"]',
-    'h1.product-name',
-    '.product-detail h1',
-    'h1'
-  ];
+const baseGetName = config.listing.getName;
+config.listing.getName = function (card) {
+  const brandEl = card.querySelector('.product-brand-name');
+  return withBrand(baseGetName(card), brandEl && brandEl.textContent);
+};
 
-  function textOf(el) {
-    return el && el.textContent ? el.textContent.trim() : '';
-  }
+const baseGetProductName = config.product.getProductName;
+config.product.getProductName = function () {
+  const brandEl = document.querySelector('h1.product-brand, .product-brand');
+  return withBrand(baseGetProductName(), brandEl && brandEl.textContent);
+};
 
-  function firstText(root, selectors) {
-    for (const sel of selectors) {
-      const el = root.querySelector(sel);
-      if (el && textOf(el)) return textOf(el);
-    }
-    return null;
-  }
+// Listing tiles anchor "Adicionar" with position: absolute; bottom: 0,
+// independent of how much text content (ratings, brand, promo message,
+// bottle-deposit notice) renders above it — real measurements across
+// products showed that gap varying from 22px to 36px on the exact same
+// page, so no fixed-size badge injected into that text flow can reliably
+// avoid it for every product; shrinking the badge only reduced how often
+// it happened. Overlaying the badge on the product image instead sidesteps
+// the problem entirely — .product-tile-image is already position:relative
+// (it's how the site places its own "Poupe X%" promo graphic), and that
+// promo graphic only ever occupies the image's bottom portion, leaving the
+// top-right corner reliably free (see common.css's
+// .product-tile-image > .origeu-badges rule).
+config.listing.getInjectTarget = function (card) {
+  return card.querySelector('.product-tile-image') || card;
+};
 
-  BuyEU.init({
-    listing: {
-      cardSelector: CARD_SELECTORS,
-      getIdentity(card) {
-        return { barcode: BuyEU.findJsonLdBarcode(card), name: firstText(card, NAME_SELECTORS) };
-      },
-      getInjectTarget(card) {
-        return card;
-      }
-    },
-    product: {
-      isProductPage() {
-        return Boolean(BuyEU.findJsonLdBarcode(document)) ||
-          PDP_NAME_SELECTORS.some((sel) => document.querySelector(sel));
-      },
-      getProductIdentity() {
-        return {
-          barcode: BuyEU.findJsonLdBarcode(document),
-          name: firstText(document, PDP_NAME_SELECTORS)
-        };
-      },
-      getProductInjectTarget() {
-        let h1 = null;
-        for (const sel of PDP_NAME_SELECTORS) {
-          h1 = document.querySelector(sel);
-          if (h1) break;
-        }
-        if (!h1) return null;
-        let anchor = h1.parentElement && h1.parentElement.querySelector(':scope > .buyeu-anchor');
-        if (!anchor) {
-          anchor = document.createElement('div');
-          anchor.className = 'buyeu-anchor';
-          h1.insertAdjacentElement('afterend', anchor);
-        }
-        return anchor;
-      }
-    }
-  });
-})();
+OrigEU.init(config);
