@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "default_locale": "pt_PT",
   "name": "__MSG_extName__",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Know where your brands come from.",
   "icons": {
     "16": "icons/icon16.png",
