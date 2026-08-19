@@ -108,3 +108,8 @@ start showing real data for whatever brands you've added.
 
 `ARCHITECTURE.md` covers how the matching works, the supported sites'
 platform details, and how to add a new site or a new browser target.
+
+## License
+
+[GPL-3.0](LICENSE) — if you redistribute this or a modified version, it
+must stay open-source under the same license.
