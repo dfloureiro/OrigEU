@@ -16,6 +16,12 @@
   // free-text names (see git history, backend/d1/migrations/0005_country_codes.sql).
   const { countryLabel, flagFromCode } = window.OrigEUCountries;
 
+  function esc(s) {
+    const div = document.createElement('div');
+    div.textContent = s ?? '';
+    return div.innerHTML;
+  }
+
   async function loadSettings() {
     try {
       const stored = await chrome.storage.local.get(SETTINGS_KEY);
@@ -478,8 +484,8 @@
       }
       confirm.innerHTML = resolved
         .map(({ entry, code }) => {
-          const label = code ? window.OrigEUCountries.countryLabel(code) : `"${entry}"?`;
-          return `<span class="${code ? '' : 'origeu-suggest__country-confirm--unknown'}">${label}</span>`;
+          const label = code ? window.OrigEUCountries.countryLabel(code) : `"${esc(entry)}"?`;
+          return `<span class="${code ? '' : 'origeu-suggest__country-confirm--unknown'}">${esc(label)}</span>`;
         })
         .join(', ');
     }
