@@ -1,3 +1,40 @@
+/* Bare wrapper sfcc-common.js inserts right after a PDP's <h1> (see
+   getProductInjectTarget) — otherwise fully exposed to whatever layout
+   rules the host page happens to apply to that DOM slot. auchan.pt's own
+   CSS turned out to position something there absolutely, which put our
+   badge on top of the product title instead of below it. Reset back to a
+   plain block box so only .origeu-badges below controls the layout. */
+.origeu-anchor {
+  position: static !important;
+  display: block !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  float: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: auto !important;
+  transform: none !important;
+}
+
+/* PDP variant of the pingodoce listing-tile trick above: overlaying the
+   badge on the product image sidesteps a fixed-height title container
+   entirely, instead of trying to fit the full-size badge (with citation
+   link) into whatever gap happens to be left before the image starts. Only
+   used when a site opts in via sfcc-common.js's pdpImageOverlaySelector
+   (currently auchan.pt). */
+.origeu-anchor--overlay {
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  right: 10px !important;
+  max-width: calc(100% - 20px) !important;
+  z-index: 5 !important;
+}
+
 .origeu-badges {
   display: inline-flex;
   align-items: center;

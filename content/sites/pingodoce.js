@@ -14,6 +14,13 @@
 // stock name selectors (tileBodySelector doesn't need one: getInjectTarget
 // is replaced below instead of using it, see that comment for why).
 const config = OrigEUSfcc.buildConfig({
+  // .product-tile-pd is the card class used by the home page's "highlights/
+  // opportunities" carousel (.pd-highlights-opportunities) — a different
+  // component than the search-results/category listing tiles, which use
+  // the stock .product-tile class already covered by the default
+  // cardSelector. Its inner markup (.product-name-link a, .product-brand-name,
+  // .product-tile-image) matches the same selectors either way.
+  cardSelector: '.product-tile, [data-pid].product, .product-grid-tile, .product-tile-pd',
   nameSelectors: ['.product-name-link a', '.pdp-link a', '.pdp-link', '.product-name a', '.product-name', 'a.link', 'h2', 'h3']
 });
 
