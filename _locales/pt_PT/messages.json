@@ -105,6 +105,9 @@
   "suggestSourceLabel": {
     "message": "Fonte (URL, opcional)"
   },
+  "suggestSourceInvalid": {
+    "message": "A fonte deve ser um link https:// válido."
+  },
   "suggestNotesLabel": {
     "message": "Notas (opcional)"
   },

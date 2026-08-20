@@ -4,6 +4,22 @@ const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 // are a display concern handled in the extension (content/countries.js).
 const COUNTRY_CODE_RE = /^[A-Za-z]{2}$/;
 
+// Citation URLs (brands.source, pending_brands.source) get rendered as
+// real clickable links (content/common.js's badge tooltip,
+// backend/admin/public/admin.js's pending-suggestions table) — restricting
+// to https: here, at the one place both write paths (admin brand form,
+// public suggestion endpoint) funnel through, keeps a javascript:, data:,
+// or plain (unencrypted) http: URL from ever reaching storage in the first
+// place. new URL() throws on anything unparseable and normalizes scheme
+// case, so this can't be bypassed with "javascript://..." or "HTTPS://...".
+export function isHttpsUrl(s) {
+  try {
+    return new URL(String(s)).protocol === 'https:';
+  } catch (err) {
+    return false;
+  }
+}
+
 export function validateBrand(payload, { requireId } = { requireId: true }) {
   const errors = [];
   if (!payload || typeof payload !== 'object') {
@@ -23,6 +39,13 @@ export function validateBrand(payload, { requireId } = { requireId: true }) {
       errors.push('countries must be a list of 2-letter ISO codes (e.g. "PT")');
     } else if (payload.countries.some((c) => !COUNTRY_CODE_RE.test(String(c)))) {
       errors.push('countries must contain only 2-letter ISO codes (e.g. "PT", "DE")');
+    }
+  }
+  if (payload.source) {
+    if (String(payload.source).length > 500) {
+      errors.push('source is too long (max. 500 characters)');
+    } else if (!isHttpsUrl(payload.source)) {
+      errors.push('source must be a valid https:// URL');
     }
   }
   if (payload.notesEn && String(payload.notesEn).length > 1000) {
@@ -59,8 +82,12 @@ export function validateSuggestion(payload) {
       errors.push('countries must contain only 2-letter ISO codes (e.g. "PT", "DE")');
     }
   }
-  if (payload.source && String(payload.source).length > 500) {
-    errors.push('source is too long (max. 500 characters)');
+  if (payload.source) {
+    if (String(payload.source).length > 500) {
+      errors.push('source is too long (max. 500 characters)');
+    } else if (!isHttpsUrl(payload.source)) {
+      errors.push('source must be a valid https:// URL');
+    }
   }
   if (payload.notes && String(payload.notes).length > 1000) {
     errors.push('notes is too long (max. 1000 characters)');

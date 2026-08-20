@@ -23,6 +23,21 @@
     return div.innerHTML;
   }
 
+  // Mirrors backend/shared/validate.js's isHttpsUrl() — duplicated here for
+  // the same reason as SETTINGS_KEY/DEFAULT_SETTINGS above (content
+  // scripts can't import ES modules). Guards both directions: rejects a
+  // non-https source before it's ever submitted from the suggestion form,
+  // and refuses to render one as a clickable link even if it somehow made
+  // it into a lookup result (e.g. data written directly to D1, bypassing
+  // the API's own validation).
+  function isHttpsUrl(s) {
+    try {
+      return new URL(String(s)).protocol === 'https:';
+    } catch (err) {
+      return false;
+    }
+  }
+
   async function loadSettings() {
     try {
       const stored = await chrome.storage.local.get(SETTINGS_KEY);
@@ -153,7 +168,8 @@
   // came from.
   function citationLink(result) {
     const sig = result && result.euSignals && result.euSignals[0];
-    return sig && sig.sourceUrl ? [{ url: sig.sourceUrl, label: chrome.i18n.getMessage('citationLinkLabel') }] : [];
+    if (!sig || !sig.sourceUrl || !isHttpsUrl(sig.sourceUrl)) return [];
+    return [{ url: sig.sourceUrl, label: chrome.i18n.getMessage('citationLinkLabel') }];
   }
 
   // The short factual blurb recorded per-brand in the backoffice (when
@@ -544,12 +560,18 @@
       errorEl.hidden = true;
       const name = form.name.value.trim();
       if (!name) return;
+      const source = form.source.value.trim() || null;
+      if (source && !isHttpsUrl(source)) {
+        errorEl.textContent = chrome.i18n.getMessage('suggestSourceInvalid');
+        errorEl.hidden = false;
+        return;
+      }
       submitBtn.disabled = true;
       submitBtn.textContent = chrome.i18n.getMessage('suggestSubmitting');
       const response = await requestSuggestion({
         name,
         countries: resolveCountriesField(form.countries.value).map(({ entry, code }) => code || entry.toUpperCase()),
-        source: form.source.value.trim() || null,
+        source,
         notes: form.notes.value.trim() || null
       });
       submitBtn.disabled = false;

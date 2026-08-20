@@ -86,6 +86,21 @@ function esc(s) {
   return div.innerHTML;
 }
 
+// Mirrors backend/shared/validate.js's isHttpsUrl() — this file is a plain
+// classic script (no shared imports across the admin/extension boundary),
+// so it's duplicated rather than pulled in. Used both to reject a
+// non-https source before submitting the brand form, and to refuse
+// rendering one as a clickable link in the pending-suggestions table even
+// if it somehow got stored (e.g. written directly to D1, bypassing the
+// API's own validation).
+function isHttpsUrl(s) {
+  try {
+    return new URL(String(s)).protocol === 'https:';
+  } catch (err) {
+    return false;
+  }
+}
+
 // Splits a comma-separated field into resolved codes. Each entry can be a
 // code ("PT") or a name ("Portugal") — resolveCountryInput tries a code
 // match first, then the reverse lookup. Whatever doesn't resolve is kept
@@ -236,12 +251,17 @@ async function initForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorsEl.textContent = '';
+    const source = form.source.value.trim() || null;
+    if (source && !isHttpsUrl(source)) {
+      errorsEl.textContent = 'source must be a valid https:// URL';
+      return;
+    }
     const payload = {
       id: idEl.value.trim(),
       name: form.name.value.trim(),
       aliases: form.aliases.value.split(',').map((s) => s.trim()).filter(Boolean),
       countries: resolveCountriesField(form.countries.value).map(({ entry, code }) => code || entry.toUpperCase()),
-      source: form.source.value.trim() || null,
+      source,
       notesEn: form.notesEn.value.trim() || null,
       notesPt: form.notesPt.value.trim() || null,
       active: form.active.checked
@@ -284,7 +304,7 @@ async function initPending() {
         <tr>
           <td>${esc(p.name)}</td>
           <td>${esc((p.countries || []).map(countryLabel).join(', '))}</td>
-          <td>${p.source ? `<a href="${esc(p.source)}" target="_blank" rel="noopener noreferrer">source ↗</a>` : ''}</td>
+          <td>${p.source && isHttpsUrl(p.source) ? `<a href="${esc(p.source)}" target="_blank" rel="noopener noreferrer">source ↗</a>` : ''}</td>
           <td>${esc(p.notes || '')}</td>
           <td>${esc((p.suggestedAt || '').slice(0, 10))}</td>
           <td>
