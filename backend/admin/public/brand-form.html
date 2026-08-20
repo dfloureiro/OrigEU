@@ -19,6 +19,13 @@
     </label>
     <label>Aliases (comma-separated — alternative names used on shelves)
       <input name="aliases" placeholder="Ritter, Ritter Sport Schokolade">
+      <small>Each alias matches as a whole word/phrase in product titles —
+        never add one that's an ordinary word on its own (e.g. "bio",
+        "extra", "always"), it'll false-match unrelated products. If the
+        brand's real name IS an ordinary word, use a wildcard instead:
+        "amaciador * comfort" requires both "amaciador" and "comfort" to
+        appear, in that order, with any words (or none) in between — safer
+        than the bare word alone.</small>
     </label>
     <label>Countries (comma-separated), facts only, no need to indicate EU/EFTA here
       <input name="countries" id="countriesInput" autocomplete="off" placeholder="Portugal, Germany, USA…">
