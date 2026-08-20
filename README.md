@@ -109,6 +109,11 @@ start showing real data for whatever brands you've added.
 `ARCHITECTURE.md` covers how the matching works, the supported sites'
 platform details, and how to add a new site or a new browser target.
 
+## Privacy
+
+[PRIVACY.md](PRIVACY.md) — short version: no data collection, nothing you
+browse or buy is ever sent anywhere.
+
 ## License
 
 [GPL-3.0](LICENSE) — if you redistribute this or a modified version, it
