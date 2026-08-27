@@ -66,4 +66,24 @@ config.listing.getInjectTarget = function (card) {
   return card.querySelector('.product-tile-image') || card;
 };
 
+// Search-box typeahead dropdown: verified via the site's own
+// SearchServices-GetSuggestions XHR endpoint (the normal page fetch never
+// runs it). Each suggestion is `.item.product-suggestion[data-pid]`, with
+// the name in `.product-name` (matches the default nameSelectors fallback)
+// and, like the main listing above, the brand in its own separate element —
+// `.product-brand` here rather than `.product-brand-name`, so it needs its
+// own brand-folding getter rather than reusing baseGetName's selector.
+config.suggestions = {
+  cardSelector: '.item.product-suggestion',
+  getName(card) {
+    const nameEl = card.querySelector('.product-name');
+    const brandEl = card.querySelector('.product-brand');
+    const name = nameEl && nameEl.textContent && nameEl.textContent.trim();
+    return withBrand(name, brandEl && brandEl.textContent);
+  },
+  getInjectTarget(card) {
+    return card.querySelector('.product-info') || card;
+  }
+};
+
 OrigEU.init(config);

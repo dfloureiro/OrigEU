@@ -622,6 +622,7 @@
   async function init(siteConfig) {
     const run = () => {
       if (siteConfig.listing) scanListing(siteConfig.listing);
+      if (siteConfig.suggestions) scanListing(siteConfig.suggestions);
       if (siteConfig.product) scanProductPage(siteConfig.product);
     };
 

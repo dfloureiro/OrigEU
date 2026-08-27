@@ -45,7 +45,35 @@
     // (see .product-tile-image in content/common.css).
     const pdpImageOverlaySelector = overrides.pdpImageOverlaySelector || null;
 
-    return {
+    // Optional: the search-box typeahead ("Sugestões"/"Queria dizer?")
+    // dropdown that appears while typing, before a search is submitted —
+    // distinct from the listing/category results page above (which already
+    // uses the stock .product-tile markup). All three sites hit the same
+    // SFRA `SearchServices-GetSuggestions` endpoint, but each renders its
+    // own bespoke markup for it (verified via that endpoint directly, since
+    // it's populated by an XHR the normal page fetch never runs) — auchan.pt:
+    // `.item` spans inside `.auc-suggestions__image-items`; continente.pt:
+    // `.suggestion-product-item[data-pid]`; pingodoce.pt:
+    // `.item.product-suggestion[data-pid]`. None of those match the listing
+    // cardSelector/nameSelectors above, so there's no safe shared default
+    // the way there is for the real listing tiles — a site opts in by
+    // passing suggestionsCardSelector; sites that don't just skip this scan.
+    const suggestionsCardSelector = overrides.suggestionsCardSelector || null;
+    const suggestionsNameSelectors = overrides.suggestionsNameSelectors || nameSelectors;
+    // Optional: like pingodoce.js's withBrand() for the main listing, some
+    // sites render the brand outside the matched name text — pass a custom
+    // getter instead of suggestionsNameSelectors when that's needed.
+    const suggestionsGetName = overrides.suggestionsGetName || null;
+    // Optional: element within the card to inject into (defaults to the
+    // card itself) — e.g. auchan.pt's `.suggestion-offers`, so the badge
+    // lands next to the site's own promo badge instead of after the whole
+    // clickable row.
+    const suggestionsInjectTarget = overrides.suggestionsInjectTarget || null;
+    // Optional: same idea as insertBeforeSelector above, scoped to the
+    // suggestions inject target.
+    const suggestionsInsertBeforeSelector = overrides.suggestionsInsertBeforeSelector || null;
+
+    const config = {
       listing: {
         cardSelector,
         getName(card) {
@@ -106,6 +134,30 @@
         }
       }
     };
+
+    if (suggestionsCardSelector) {
+      config.suggestions = {
+        cardSelector: suggestionsCardSelector,
+        getName(card) {
+          if (suggestionsGetName) return suggestionsGetName(card);
+          for (const sel of suggestionsNameSelectors) {
+            const el = card.querySelector(sel);
+            if (el && textOf(el)) return textOf(el);
+          }
+          return null;
+        },
+        getInjectTarget(card) {
+          if (!suggestionsInjectTarget) return card;
+          return card.querySelector(suggestionsInjectTarget) || card;
+        },
+        getInjectBefore(card, target) {
+          if (!suggestionsInsertBeforeSelector) return null;
+          return target.querySelector(suggestionsInsertBeforeSelector) || null;
+        }
+      };
+    }
+
+    return config;
   }
 
   window.OrigEUSfcc = { buildConfig };

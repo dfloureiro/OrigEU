@@ -99,6 +99,18 @@ top-right corner — a spot that graphic never uses — sidestepping the
 text-flow height budget entirely (see `content/common.css`'s
 `.product-tile-image > .origeu-badges` rule).
 
+All three sites also get a badge in the search-box typeahead dropdown (the
+"Sugestões"/"Queria dizer?" panel that appears while typing, before a
+search is submitted) — a separate `config.suggestions` scan alongside
+`listing`/`product`, driven by the same `SearchServices-GetSuggestions` SFRA
+endpoint on all three, but with bespoke markup per site that doesn't match
+the listing `cardSelector`/`nameSelectors` at all, so `sfcc-common.js` only
+builds this scan when a site passes `suggestionsCardSelector` — there's no
+shared default the way there is for real listing tiles. Continente and Pingo
+Doce inject the badge into the text flow (`.suggestion-product-details`,
+`.product-info`); auchan.pt anchors it inside `.suggestion-offers`, the same
+element the site uses for its own promo pill, so ours renders alongside it.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
