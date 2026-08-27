@@ -15,11 +15,17 @@ database:
   - `POST /api/suggestions` — brand suggestions from the extension's
     click-to-suggest form, written only to a separate `pending_brands`
     queue (`backend/d1/migrations/0002_pending_brands.sql`), never to the
-    live `brands` table. Reviewed and promoted into a real brand from the
-    backoffice's "Sugestões pendentes" page. Rate-limited per IP (5/minute,
-    via the `SUGGESTION_RATE_LIMIT` KV namespace) since it's the one
-    unauthenticated write endpoint — a coarse deterrent against scripted
-    spam into the pending queue, not a hard guarantee.
+    live `brands` table. Two flavors, both in the same queue: an "unknown
+    brand" badge's suggestion has no `brandId` and is reviewed as a
+    brand-new entry; a *known* brand's badge also offers a "suggest a
+    correction" button (next to its citation link) whose suggestion carries
+    that brand's id (`brandId` — `backend/d1/migrations/0007_pending_brand_edits.sql`)
+    and is reviewed as a proposed edit to that existing row instead. Either
+    way, reviewed and promoted from the backoffice's "Sugestões pendentes"
+    page. Rate-limited per IP (5/minute, via the `SUGGESTION_RATE_LIMIT` KV
+    namespace) since it's the one unauthenticated write endpoint — a coarse
+    deterrent against scripted spam into the pending queue, not a hard
+    guarantee.
 - **`admin/`** — the backoffice: a plain HTML/JS UI (`public/`) plus CRUD
   APIs (`src/routes.js`) for brands (add/edit/search/soft-delete),
   EU/EFTA status (add/edit/delete), and pending suggestions

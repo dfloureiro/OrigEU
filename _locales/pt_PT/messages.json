@@ -86,12 +86,18 @@
   "citationLinkLabel": {
     "message": "Ver fonte ↗"
   },
+  "suggestEditLabel": {
+    "message": "Sugerir correção"
+  },
   "loadingBadgeFull": {
     "message": "OrigEU a verificar…"
   },
 
   "suggestTitle": {
     "message": "Sugerir marca"
+  },
+  "suggestEditTitle": {
+    "message": "Sugerir correção a esta marca"
   },
   "suggestClose": {
     "message": "Fechar"

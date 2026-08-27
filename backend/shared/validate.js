@@ -92,6 +92,18 @@ export function validateSuggestion(payload) {
   if (payload.notes && String(payload.notes).length > 1000) {
     errors.push('notes is too long (max. 1000 characters)');
   }
+  // Set by the extension's "suggest a correction" button on a known-brand
+  // badge (content/common.js's suggestEditPayload) — the id of the brand
+  // it's proposing an edit to, rather than a brand-new one. Only the slug
+  // format is checked here (same ID_RE as validateBrand's id), not that it
+  // actually exists — this endpoint is public/unauthenticated, and a
+  // brandId for a since-deleted brand just makes the backoffice's review
+  // link 404, same as any other stale id.
+  if (payload.brandId !== undefined && payload.brandId !== null && payload.brandId !== '') {
+    if (typeof payload.brandId !== 'string' || !ID_RE.test(payload.brandId)) {
+      errors.push('brandId must be a valid brand id');
+    }
+  }
   return errors;
 }
 

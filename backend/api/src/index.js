@@ -100,7 +100,8 @@ export default {
           name: payload.name.trim(),
           countries: Array.isArray(payload.countries) ? payload.countries.map((c) => String(c).trim().toUpperCase()).filter(Boolean) : [],
           source: payload.source ? String(payload.source).trim() : null,
-          notes: payload.notes ? String(payload.notes).trim() : null
+          notes: payload.notes ? String(payload.notes).trim() : null,
+          brandId: payload.brandId ? String(payload.brandId).trim() : null
         });
         return Response.json(pending, { status: 201 });
       } catch (err) {

@@ -81,6 +81,11 @@ function rowToPending(row) {
     countries: JSON.parse(row.countries || '[]'),
     source: row.source,
     notes: row.notes,
+    // Set only for a "suggest a correction" submission (content/common.js's
+    // data-origeu-suggest-edit) — the id of the existing brand it proposes
+    // to edit, rather than a brand-new one. See
+    // backend/d1/migrations/0007_pending_brand_edits.sql.
+    brandId: row.brand_id || null,
     suggestedAt: row.suggested_at
   };
 }
@@ -89,13 +94,13 @@ function rowToPending(row) {
 // (backend/api). Kept in a separate table from `brands` so that endpoint
 // never has write access to the real, live brand list — see
 // backend/d1/migrations/0002_pending_brands.sql.
-export async function createPending(db, { name, countries, source, notes }) {
+export async function createPending(db, { name, countries, source, notes, brandId }) {
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   await db.prepare(`
-    INSERT INTO pending_brands (id, name, countries, source, notes, suggested_at)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `).bind(id, name, JSON.stringify(countries), source, notes, now).run();
+    INSERT INTO pending_brands (id, name, countries, source, notes, brand_id, suggested_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `).bind(id, name, JSON.stringify(countries), source, notes, brandId || null, now).run();
   const row = await db.prepare('SELECT * FROM pending_brands WHERE id = ?').bind(id).first();
   return rowToPending(row);
 }

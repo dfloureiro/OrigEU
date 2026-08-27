@@ -188,6 +188,26 @@
     return (preferPt ? (sig.notesPt || sig.notesEn) : (sig.notesEn || sig.notesPt)) || null;
   }
 
+  // Data for the "suggest a correction" button shown in a *known*-brand
+  // badge's tooltip, next to its citation link — same click-to-suggest
+  // dialog the "unknown" badge uses, just pre-filled with what's already on
+  // file and carrying the brand's id so the backoffice can treat it as a
+  // proposed edit to that row instead of a new one (see openSuggestForm's
+  // `prefill` param and pending_brands.brand_id). null when there's no
+  // brandId to attach it to (e.g. a cached result from before this field
+  // existed — see lib/cache.js's 30-day TTL).
+  function suggestEditPayload(result) {
+    const sig = result && result.euSignals && result.euSignals[0];
+    if (!sig || !sig.brandId) return null;
+    return {
+      brandId: sig.brandId,
+      name: (result && result.brands) || '',
+      countries: sig.countries || [],
+      source: sig.sourceUrl || '',
+      notes: brandNote(result) || ''
+    };
+  }
+
   // Badge text for a given (status, country, region) triple, honoring the
   // short/long display setting. "Short" is just the flag/icon — the badge's
   // original, compact-only look. "Long" spells it out ("OrigEU ❤️ Portugal
@@ -245,6 +265,9 @@
     el.setAttribute('data-origeu-state', JSON.stringify(state));
     if (state.status === 'unknown') {
       el.setAttribute('data-origeu-suggest', productName || '');
+    } else {
+      const editPayload = suggestEditPayload(result);
+      if (editPayload) el.setAttribute('data-origeu-suggest-edit', JSON.stringify(editPayload));
     }
     return el;
   }
@@ -411,22 +434,52 @@
       tip.appendChild(noteEl);
     }
     const linksRaw = target.getAttribute('data-origeu-tip-links');
-    if (linksRaw) {
-      let links = [];
-      try {
-        links = JSON.parse(linksRaw);
-      } catch (err) {
-        links = [];
+    const editRaw = target.getAttribute('data-origeu-suggest-edit');
+    if (linksRaw || editRaw) {
+      const actions = document.createElement('div');
+      actions.className = 'origeu-tooltip__actions';
+      if (linksRaw) {
+        let links = [];
+        try {
+          links = JSON.parse(linksRaw);
+        } catch (err) {
+          links = [];
+        }
+        for (const l of links) {
+          const link = document.createElement('a');
+          link.href = l.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = l.label || l.url;
+          link.className = 'origeu-tooltip__link';
+          actions.appendChild(link);
+        }
       }
-      for (const l of links) {
-        const link = document.createElement('a');
-        link.href = l.url;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.textContent = l.label || l.url;
-        link.className = 'origeu-tooltip__link';
-        tip.appendChild(link);
+      if (editRaw) {
+        let editPayload = null;
+        try {
+          editPayload = JSON.parse(editRaw);
+        } catch (err) {
+          editPayload = null;
+        }
+        if (editPayload) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'origeu-tooltip__link origeu-tooltip__suggest-edit';
+          btn.textContent = chrome.i18n.getMessage('suggestEditLabel');
+          // Stops this click from also reaching the document-level listener
+          // below (closeSuggestForm's outside-click check) — that listener
+          // sees suggestEl as just-opened but this button as outside it
+          // (it lives in the tooltip, a separate body-level element), which
+          // would otherwise close the panel the instant it opens.
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openSuggestForm(target, { prefill: editPayload });
+          });
+          actions.appendChild(btn);
+        }
       }
+      if (actions.childNodes.length) tip.appendChild(actions);
     }
     tip.style.display = 'block';
     positionTooltip(target, tip);
@@ -524,7 +577,7 @@
     panel.className = 'origeu-suggest';
     panel.innerHTML = `
       <div class="origeu-suggest__header">
-        <span>${chrome.i18n.getMessage('suggestTitle')}</span>
+        <span class="origeu-suggest__title">${chrome.i18n.getMessage('suggestTitle')}</span>
         <button type="button" class="origeu-suggest__close" aria-label="${chrome.i18n.getMessage('suggestClose')}">×</button>
       </div>
       <form>
@@ -572,7 +625,8 @@
         name,
         countries: resolveCountriesField(form.countries.value).map(({ entry, code }) => code || entry.toUpperCase()),
         source,
-        notes: form.notes.value.trim() || null
+        notes: form.notes.value.trim() || null,
+        brandId: panel.dataset.brandId || undefined
       });
       submitBtn.disabled = false;
       submitBtn.textContent = chrome.i18n.getMessage('suggestSubmit');
@@ -589,14 +643,32 @@
     return panel;
   }
 
-  function openSuggestForm(target) {
+  // `options.prefill` (see suggestEditPayload above) switches this from the
+  // "unknown brand" flow (blank form, just the scraped product name) to the
+  // "suggest a correction" flow: the form starts filled with what's already
+  // on file for that brand, and the submitted payload carries its brandId
+  // so the backoffice can review it as a proposed edit instead of a
+  // brand-new entry (see pending_brands.brand_id).
+  function openSuggestForm(target, options) {
     hideTooltip();
     cancelHide();
     if (!suggestEl) suggestEl = buildSuggestForm();
     const form = suggestEl.querySelector('form');
+    const prefill = options && options.prefill;
     form.hidden = false;
     form.reset();
-    form.name.value = target.getAttribute('data-origeu-suggest') || '';
+    suggestEl.dataset.brandId = (prefill && prefill.brandId) || '';
+    suggestEl.querySelector('.origeu-suggest__title').textContent =
+      chrome.i18n.getMessage(prefill ? 'suggestEditTitle' : 'suggestTitle');
+    if (prefill) {
+      form.name.value = prefill.name || '';
+      form.countries.value = (prefill.countries || []).join(', ');
+      form.source.value = prefill.source || '';
+      form.notes.value = prefill.notes || '';
+    } else {
+      form.name.value = target.getAttribute('data-origeu-suggest') || '';
+    }
+    form.countries.dispatchEvent(new Event('input')); // refresh the country-confirm label for the value just set above
     suggestEl.querySelector('.origeu-suggest__error').hidden = true;
     suggestEl.querySelector('.origeu-suggest__success').hidden = true;
     suggestEl.style.display = 'block';

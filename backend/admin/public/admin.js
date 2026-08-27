@@ -213,15 +213,17 @@ async function initForm() {
   attachCountryCodeConfirm(document.getElementById('countriesInput'));
   const params = new URLSearchParams(location.search);
   const editingId = params.get('id');
-  // Set when arriving from "Use in new brand →" on the pending
-  // suggestions page — prefills the create form from a suggestion instead
-  // of an existing brand, and the suggestion gets deleted from the pending
-  // queue once the brand is actually saved (not before, in case the save
-  // fails validation and the user abandons the form).
+  // Set when arriving from the pending-suggestions page — either "Use in
+  // new brand →" (no `id`: prefills the create form from a suggestion) or
+  // "Review suggested edit →" (with `id`: an existing brand's page,
+  // overlaid with what was suggested for it). Either way the suggestion
+  // gets deleted from the pending queue once the save actually succeeds
+  // (not before, in case the save fails validation and the user abandons
+  // the form).
   const pendingId = params.get('pendingId');
 
   if (editingId) {
-    document.getElementById('formTitle').textContent = 'Edit brand';
+    document.getElementById('formTitle').textContent = pendingId ? 'Review suggested edit' : 'Edit brand';
     idEl.readOnly = true;
     try {
       const brand = await fetchJson(`${API_BASE}/${encodeURIComponent(editingId)}`);
@@ -233,6 +235,19 @@ async function initForm() {
       form.notesEn.value = brand.notesEn || '';
       form.notesPt.value = brand.notesPt || '';
       form.active.checked = Boolean(brand.active);
+      if (pendingId) {
+        // Overlay the suggested fields on top of the brand's current, just-
+        // loaded values, so the reviewer sees exactly what was proposed —
+        // aliases/active aren't part of the suggestion schema, so those
+        // stay as the live brand's.
+        if (params.get('name')) form.name.value = params.get('name');
+        if (params.get('countries')) form.countries.value = params.get('countries');
+        if (params.get('source')) form.source.value = params.get('source');
+        // Suggestion notes are raw free text of unknown language — parked
+        // in notesEn, overwriting the brand's current one; cross-check
+        // against notesPt (untouched here) before saving.
+        if (params.get('notes')) form.notesEn.value = params.get('notes');
+      }
       form.countries.dispatchEvent(new Event('input')); // populated programmatically — nudge the confirm label to show
     } catch (err) {
       errorsEl.textContent = err.message;
@@ -279,9 +294,9 @@ async function initForm() {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        if (pendingId) {
-          await fetchJson(`/api/pending/${encodeURIComponent(pendingId)}`, { method: 'DELETE' }).catch(() => {});
-        }
+      }
+      if (pendingId) {
+        await fetchJson(`/api/pending/${encodeURIComponent(pendingId)}`, { method: 'DELETE' }).catch(() => {});
       }
       location.href = '/';
     } catch (err) {
@@ -300,21 +315,28 @@ async function initPending() {
         const params = new URLSearchParams({ pendingId: p.id, name: p.name, countries: (p.countries || []).join(', ') });
         if (p.source) params.set('source', p.source);
         if (p.notes) params.set('notes', p.notes);
+        // brandId set means this came from the "suggest a correction"
+        // button on a known-brand badge (content/common.js), not the
+        // "unknown brand" click-to-suggest form — route it at the existing
+        // brand's edit page (via `id`) instead of a blank create form.
+        const isEdit = Boolean(p.brandId);
+        if (isEdit) params.set('id', p.brandId);
         return `
         <tr>
           <td>${esc(p.name)}</td>
+          <td>${isEdit ? `Edit: ${esc(p.brandId)}` : 'New brand'}</td>
           <td>${esc((p.countries || []).map(countryLabel).join(', '))}</td>
           <td>${p.source && isHttpsUrl(p.source) ? `<a href="${esc(p.source)}" target="_blank" rel="noopener noreferrer">source ↗</a>` : ''}</td>
           <td>${esc(p.notes || '')}</td>
           <td>${esc((p.suggestedAt || '').slice(0, 10))}</td>
           <td>
-            <a class="button use" href="brand-form?${params.toString()}">Use in new brand →</a>
+            <a class="button use" href="brand-form?${params.toString()}">${isEdit ? 'Review suggested edit →' : 'Use in new brand →'}</a>
             <button type="button" data-id="${esc(p.id)}" class="discard">discard</button>
           </td>
         </tr>
       `;
       }).join('')
-      : '<tr><td colspan="6">No pending suggestions.</td></tr>';
+      : '<tr><td colspan="7">No pending suggestions.</td></tr>';
   }
 
   rowsEl.addEventListener('click', async (e) => {
