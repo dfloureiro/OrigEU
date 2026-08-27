@@ -9,6 +9,16 @@ the product page — showing whether that brand is from the EU, from a
 closely-linked non-EU country (Switzerland, Norway, Iceland,
 Liechtenstein), or from somewhere else entirely.
 
+<p>
+  <a href="https://chromewebstore.google.com/detail/origeu-%E2%80%94-origem-ue/fimmiacckkhggoiclihkjhkcokdgnlia">
+    <img src="docs/badges/chrome-web-store.png" alt="Available in the Chrome Web Store" height="58">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/origeu-eu-origin/">
+    <img src="docs/badges/firefox-amo.png" alt="Get the Add-on for Firefox" height="58">
+  </a>
+</p>
+
 <img src="docs/screenshots/listing.png" alt="OrigEU badges shown on a Continente search results page" width="800">
 
 ## What the badges mean
