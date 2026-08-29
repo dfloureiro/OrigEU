@@ -334,8 +334,19 @@
     // insertBefore(node, null) behaves exactly like appendChild, so this
     // is a no-op for sites that don't pass one.
     const insertBeforeEl = options && options.insertBefore;
-    if (container.getAttribute(PROCESSED_ATTR) === 'true') return;
-    container.setAttribute(PROCESSED_ATTR, 'true');
+    // Keyed on the *name* being badged, not just "have we ever touched this
+    // node" — some SPA sites (e.g. intermarche.pt's search-bar typeahead)
+    // reuse the same DOM element in place for a *different* product as
+    // results update, without clearing attributes this extension set on
+    // it earlier. A plain boolean flag would then skip re-processing
+    // forever, leaving whichever product's badge got there first stuck on
+    // a node that now shows a completely different product. Re-annotate
+    // (replacing any existing badge) whenever the name actually changes;
+    // this is a no-op for sites where the node's product never changes
+    // without a full DOM teardown, which is every case except the one above.
+    if (container.getAttribute(PROCESSED_ATTR) === name) return;
+    container.setAttribute(PROCESSED_ATTR, name);
+    container.querySelectorAll(':scope > .origeu-badges').forEach((el) => el.remove());
 
     const placeholder = loadingBadges(full);
     container.insertBefore(placeholder, insertBeforeEl || null);
@@ -358,9 +369,9 @@
     const leafCards = cards.filter((card) => !cards.some((other) => other !== card && card.contains(other)));
     leafCards.forEach((card) => {
       const target = config.getInjectTarget(card) || card;
-      if (target.getAttribute(PROCESSED_ATTR) === 'true') return;
       const name = config.getName(card);
       if (!name) return;
+      if (target.getAttribute(PROCESSED_ATTR) === name) return;
       const insertBefore = config.getInjectBefore ? config.getInjectBefore(card, target) : null;
       annotate(target, name, { full: false, insertBefore });
     });
