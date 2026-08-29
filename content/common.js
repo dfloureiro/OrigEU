@@ -67,13 +67,21 @@
     }
   }
 
+  // Normalizes currentSettings.detail to one of the three known levels,
+  // falling back to 'long' for anything else (unset, or a future/older
+  // value this build doesn't recognize) rather than silently rendering a
+  // blank badge.
+  function detailLevel() {
+    return ['short', 'medium', 'long'].includes(currentSettings.detail) ? currentSettings.detail : 'long';
+  }
+
   // Same live-update idea as applyVisibility(), but for the badge's text
   // content rather than its display: euPill() stashes the minimal facts
   // needed to redraw a badge (status/country/region) on the element itself
-  // as data-origeu-state, so switching short/long form in the popup updates
+  // as data-origeu-state, so switching detail level in the popup updates
   // already-rendered badges in place instead of requiring a page refresh.
   function applyDetailLevel() {
-    const long = currentSettings.detail !== 'short';
+    const level = detailLevel();
     document.querySelectorAll(`.${KIND_CLASS.eu}[data-origeu-state]`).forEach((el) => {
       let state;
       try {
@@ -82,7 +90,7 @@
         return;
       }
       const textEl = el.querySelector('.origeu-pill__text');
-      if (textEl) textEl.textContent = computeBadgeText(state, long);
+      if (textEl) textEl.textContent = computeBadgeText(state, level);
     });
   }
 
@@ -209,27 +217,46 @@
   }
 
   // Badge text for a given (status, country, region) triple, honoring the
-  // short/long display setting. "Short" is just the flag/icon — the badge's
-  // original, compact-only look. "Long" spells it out ("OrigEU ❤️ Portugal
-  // 🇵🇹") so it reads on its own even on a dense listing page. Pulled out
-  // of euPill() so applyDetailLevel() can also call it, to redraw
+  // short/medium/long display setting:
+  //  - "short" is just the flag/icon — the badge's original, compact-only look.
+  //  - "medium" keeps the OrigEU branding and the status icon/flag but drops
+  //    the spelled-out country name (e.g. "OrigEU ❤️ 🇵🇹" instead of
+  //    "OrigEU ❤️ Portugal 🇵🇹") — a middle ground for when "long" reads as
+  //    too much text on a dense listing page but bare "short" reads as too
+  //    little branding.
+  //  - "long" spells it out in full.
+  // Pulled out of euPill() so applyDetailLevel() can also call it, to redraw
   // already-rendered badges in place when the setting changes.
-  function computeBadgeText(state, long) {
+  function computeBadgeText(state, level) {
+    let icon, flag, short, long;
     if (state.status === 'eu') {
       const label = countryLabel(state.code) || 'UE';
-      const flag = flagFromCode(state.code) || '🇪🇺';
-      return long ? chrome.i18n.getMessage('badgeEu', [label, flag]) : flag;
-    }
-    if (state.status === 'non-eu') {
-      if (state.region === 'efta') {
-        const label = countryLabel(state.code) || 'EFTA';
-        const flag = flagFromCode(state.code) || '🇪🇺';
-        return long ? chrome.i18n.getMessage('badgeEfta', [label, flag]) : flag;
-      }
+      flag = flagFromCode(state.code) || '🇪🇺';
+      icon = '❤️';
+      short = flag;
+      long = chrome.i18n.getMessage('badgeEu', [label, flag]);
+    } else if (state.status === 'non-eu' && state.region === 'efta') {
+      const label = countryLabel(state.code) || 'EFTA';
+      flag = flagFromCode(state.code) || '🇪🇺';
+      icon = '🤝';
+      short = flag;
+      long = chrome.i18n.getMessage('badgeEfta', [label, flag]);
+    } else if (state.status === 'non-eu') {
       const label = countryLabel(state.code);
-      return long ? (label ? chrome.i18n.getMessage('badgeNonEuCountry', [label]) : chrome.i18n.getMessage('badgeNonEuGeneric')) : '🌍';
+      flag = state.code ? flagFromCode(state.code) : null;
+      icon = '🌍';
+      short = '🌍';
+      long = label ? chrome.i18n.getMessage('badgeNonEuCountry', [label]) : chrome.i18n.getMessage('badgeNonEuGeneric');
+    } else {
+      icon = '❓';
+      flag = null;
+      short = '🇪🇺?';
+      long = chrome.i18n.getMessage('badgeUnknown');
     }
-    return long ? chrome.i18n.getMessage('badgeUnknown') : '🇪🇺?';
+
+    if (level === 'long') return long;
+    if (level === 'medium') return flag ? `OrigEU ${icon} ${flag}` : `OrigEU ${icon}`;
+    return short;
   }
 
   function euPill(result, productName) {
@@ -238,8 +265,7 @@
     const state = (result && result.euStatus !== 'unknown')
       ? { status: result.euStatus, code: result.euCountryCode || null, region: result.euRegion || null }
       : { status: 'unknown', code: null, region: null };
-    const long = currentSettings.detail !== 'short';
-    const text = computeBadgeText(state, long);
+    const text = computeBadgeText(state, detailLevel());
 
     let className;
     let tooltip;

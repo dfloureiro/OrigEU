@@ -30,7 +30,7 @@ async function init() {
   });
 
   const detailSelect = document.getElementById('detail');
-  detailSelect.value = settings.detail === 'short' ? 'short' : 'long';
+  detailSelect.value = ['short', 'medium'].includes(settings.detail) ? settings.detail : 'long';
   detailSelect.addEventListener('change', () => {
     setSettings({ detail: detailSelect.value });
   });
