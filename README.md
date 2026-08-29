@@ -43,6 +43,7 @@ full text shown above and a compact flag-only style.
 - continente.pt
 - auchan.pt
 - pingodoce.pt
+- intermarche.pt
 
 ## Honest limitations
 
@@ -82,8 +83,8 @@ Firefox:
   and self-sign it, or submit it to
   [addons.mozilla.org](https://addons.mozilla.org))
 
-Then visit continente.pt, auchan.pt or pingodoce.pt and search for a
-product.
+Then visit continente.pt, auchan.pt, pingodoce.pt or intermarche.pt and
+search for a product.
 
 > **Why two manifests?** Chrome's Manifest V3 validator rejects
 > `background.scripts` outright, while Firefox's Manifest V3 support

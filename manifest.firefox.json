@@ -31,6 +31,8 @@
     "https://www.continente.pt/*",
     "https://www.pingodoce.pt/*",
     "https://www.auchan.pt/*",
+    "https://intermarche.pt/*",
+    "https://www.intermarche.pt/*",
     "https://*.workers.dev/*"
   ],
   "background": {
@@ -53,6 +55,12 @@
     {
       "matches": ["https://www.pingodoce.pt/*"],
       "js": ["content/countries.js", "content/common.js", "content/sites/sfcc-common.js", "content/sites/pingodoce.js"],
+      "css": ["content/common.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://intermarche.pt/*", "https://www.intermarche.pt/*"],
+      "js": ["content/countries.js", "content/common.js", "content/sites/intermarche.js"],
       "css": ["content/common.css"],
       "run_at": "document_idle"
     }

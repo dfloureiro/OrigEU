@@ -67,6 +67,7 @@ out of date", not "every EU country looks non-EU".
 | continente.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter |
 | auchan.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter |
 | pingodoce.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter, with overrides |
+| intermarche.pt | Custom Next.js/React (confirmed) | Standalone adapter (`content/sites/intermarche.js`) |
 
 All three run on Salesforce Commerce Cloud (SFRA) — Pingo Doce couldn't be
 fingerprinted remotely early on (it 403s requests without a real
@@ -111,6 +112,30 @@ Doce inject the badge into the text flow (`.suggestion-product-details`,
 `.product-info`); auchan.pt anchors it inside `.suggestion-offers`, the same
 element the site uses for its own promo pill, so ours renders alongside it.
 
+intermarche.pt runs on its own custom Next.js/React storefront, not SFCC —
+`content/sites/intermarche.js` is a standalone config, not another
+`sfcc-common.js` override. It also sits behind DataDome bot-protection,
+which returns a JS-challenge page to any non-browser request — this
+project's own fetch tooling couldn't get past it the way it fetches the
+other three sites' real pages directly, so its selectors were verified a
+different way: real markup copied out of a live browser's DevTools
+(Elements panel → Copy outerHTML) for one listing tile and one PDP, rather
+than a fetched page. Unlike the SFCC sites, one listing selector
+(`.product[data-nfproductid]`) covers every surface here — the search
+results grid, the home page's own grid/carousel, and the search-box
+typeahead dropdown all render the identical card shape, verified against
+real markup from all three — so there's no separate `suggestions` scan the
+way the SFCC sites need one for their typeahead dropdown. Listing tiles
+carry the brand pre-folded into the name as a `data-name` attribute — no
+per-site brand-folding needed the way Pingo Doce's adapter needs it by
+hand — with `.product__brand`/`.product__name` as a fallback for whichever
+card doesn't have it. The badge is injected as a sibling of the card's `<a>`
+(before its `<footer>`, not inside the anchor) since the name/image link
+wraps only part of the card — a badge inside that link would also navigate
+to the PDP on click, breaking the "unknown brand" click-to-suggest
+behavior. The PDP's brand is a separate element too (`.productDetail__brand`
+next to `h1.productDetail__main_title`), folded in the same way.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -121,11 +146,13 @@ current markup (retailers restyle their sites over time).
    holding the product name
 3. Open `chrome://extensions`, click the service worker / inspect views for
    this extension to see console warnings
-4. Update the relevant selectors — all three sites share
+4. Update the relevant selectors — the three SFCC sites share
    `content/sites/sfcc-common.js` (`cardSelector`, `nameSelectors`,
    `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
-   (`content/sites/pingodoce.js`)
+   (`content/sites/pingodoce.js`). intermarche.pt doesn't use that shared
+   file at all — its selectors live directly in
+   `content/sites/intermarche.js`
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
 ## Project layout
