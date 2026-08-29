@@ -242,11 +242,14 @@
       short = flag;
       long = chrome.i18n.getMessage('badgeEfta', [label, flag]);
     } else if (state.status === 'non-eu') {
+      // label and flag are both derived from state.code, so they're truthy
+      // together or falsy together — no case where one exists without the
+      // other to worry about below.
       const label = countryLabel(state.code);
       flag = state.code ? flagFromCode(state.code) : null;
       icon = '🌍';
-      short = '🌍';
-      long = label ? chrome.i18n.getMessage('badgeNonEuCountry', [label]) : chrome.i18n.getMessage('badgeNonEuGeneric');
+      short = flag || '🌍';
+      long = label ? chrome.i18n.getMessage('badgeNonEuCountry', [label, flag]) : chrome.i18n.getMessage('badgeNonEuGeneric');
     } else {
       icon = '❓';
       flag = null;

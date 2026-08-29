@@ -56,7 +56,7 @@
     "description": "Long-form EFTA badge text"
   },
   "badgeNonEuCountry": {
-    "message": "OrigEU 🌍 $1",
+    "message": "OrigEU 🌍 $1 $2",
     "description": "Long-form non-EU badge text, country known"
   },
   "badgeNonEuGeneric": {
