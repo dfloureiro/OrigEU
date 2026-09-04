@@ -13,6 +13,7 @@ function rowToBrand(row) {
     notesPt: row.notes_pt,
     notesEs: row.notes_es,
     notesFr: row.notes_fr,
+    notesDe: row.notes_de,
     addedAt: row.added_at,
     updatedAt: row.updated_at,
     active: Boolean(row.active)
@@ -51,21 +52,21 @@ export async function getById(db, id) {
   return rowToBrand(row);
 }
 
-export async function create(db, { id, name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, active }) {
+export async function create(db, { id, name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, notesDe, active }) {
   const now = new Date().toISOString();
   await db.prepare(`
-    INSERT INTO brands (id, name, aliases, countries, source, notes_en, notes_pt, notes_es, notes_fr, added_at, updated_at, active)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).bind(id, name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, notesEs, notesFr, now, now, active).run();
+    INSERT INTO brands (id, name, aliases, countries, source, notes_en, notes_pt, notes_es, notes_fr, notes_de, added_at, updated_at, active)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(id, name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, notesEs, notesFr, notesDe, now, now, active).run();
   return getById(db, id);
 }
 
-export async function update(db, id, { name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, active }) {
+export async function update(db, id, { name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, notesDe, active }) {
   const now = new Date().toISOString();
   await db.prepare(`
-    UPDATE brands SET name = ?, aliases = ?, countries = ?, source = ?, notes_en = ?, notes_pt = ?, notes_es = ?, notes_fr = ?, updated_at = ?, active = ?
+    UPDATE brands SET name = ?, aliases = ?, countries = ?, source = ?, notes_en = ?, notes_pt = ?, notes_es = ?, notes_fr = ?, notes_de = ?, updated_at = ?, active = ?
     WHERE id = ?
-  `).bind(name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, notesEs, notesFr, now, active, id).run();
+  `).bind(name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, notesEs, notesFr, notesDe, now, active, id).run();
   return getById(db, id);
 }
 
