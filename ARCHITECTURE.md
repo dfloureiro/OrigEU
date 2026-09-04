@@ -69,6 +69,7 @@ out of date", not "every EU country looks non-EU".
 | auchan.fr | Custom server-rendered platform (confirmed) | Standalone adapter (`content/sites/auchan-fr.js`) |
 | pingodoce.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter, with overrides |
 | intermarche.pt | Custom Next.js/React (confirmed) | Standalone adapter (`content/sites/intermarche.js`) |
+| tienda.mercadona.es | Custom React SPA (confirmed) | Standalone adapter (`content/sites/mercadona.js`) |
 
 All three run on Salesforce Commerce Cloud (SFRA) — Pingo Doce couldn't be
 fingerprinted remotely early on (it 403s requests without a real
@@ -160,6 +161,25 @@ separate element (`.offer-selector__brand` next to a bare `<h1>` inside
 `.offer-selector__name--large`), folded in by hand like the other
 non-SFCC sites.
 
+tienda.mercadona.es is a client-rendered React SPA — the plain server
+response is an empty `<div id="root"></div>`, so unlike auchan.fr (and
+like intermarche.pt) its selectors were verified from real markup copied
+out of a live browser's DevTools rather than a fetched page.
+`content/sites/mercadona.js` is a standalone config. Its listing tile
+(`[data-testid="product-cell"]`) already folds the brand into the product
+name text itself (e.g. "Dentífrico Triple Acción Colgate menta intensa"),
+same reasoning as intermarche.pt's `data-name` attribute — no per-site
+brand-folding needed. More interestingly, the site has no separate PDP at
+all: clicking a product cell opens an in-page modal dialog
+(`[data-testid="private-product-detail"]`) over the still-visible search
+results, without changing the URL. That needs no special handling here —
+`content/common.js`'s scan loop already re-runs on every DOM mutation (see
+"How it works" above), and the modal opening is itself one, so
+`isProductPage()` just checks whether the modal is currently present in
+the document. The modal's own "Productos relacionados" cross-sell carousel
+reuses the exact same `[data-testid="product-cell"]` card markup as the
+main grid, so the one listing config covers it automatically too.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -174,9 +194,10 @@ current markup (retailers restyle their sites over time).
    `content/sites/sfcc-common.js` (`cardSelector`, `nameSelectors`,
    `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan (.pt) use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
-   (`content/sites/pingodoce.js`). intermarche.pt and auchan.fr don't use
-   that shared file at all — their selectors live directly in
-   `content/sites/intermarche.js` and `content/sites/auchan-fr.js`
+   (`content/sites/pingodoce.js`). intermarche.pt, auchan.fr, and
+   tienda.mercadona.es don't use that shared file at all — their selectors
+   live directly in `content/sites/intermarche.js`,
+   `content/sites/auchan-fr.js`, and `content/sites/mercadona.js`
    respectively
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
@@ -208,6 +229,7 @@ content/sites/auchan.js
 content/sites/pingodoce.js       # sfcc-common.js + overrides for renamed classes
 content/sites/intermarche.js     # standalone adapter — custom Next.js/React platform
 content/sites/auchan-fr.js       # standalone adapter — different platform from auchan.pt
+content/sites/mercadona.js       # standalone adapter — client-rendered React SPA
 backend/                         # own brand database: Cloudflare Workers + D1 + backoffice (see backend/README.md)
 ```
 
