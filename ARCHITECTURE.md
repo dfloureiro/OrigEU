@@ -180,6 +180,17 @@ the document. The modal's own "Productos relacionados" cross-sell carousel
 reuses the exact same `[data-testid="product-cell"]` card markup as the
 main grid, so the one listing config covers it automatically too.
 
+Both surfaces pin their own "add to cart" control to a fixed-height
+container's bottom edge (the grid cell on the listing, a flex column
+matched to the image gallery's height in the modal) — inserting the badge
+into that flow, as first shipped, pushed the control down past the
+container's own boundary and hid it. Fixed the same way as pingodoce.pt's
+listing tiles and auchan.pt's PDP: the badge is an absolute-positioned
+overlay instead of flow content (`[data-testid="product-cell"] >
+.origeu-badges` in `content/common.css` for the grid; `.origeu-anchor--overlay`
+anchored to `.private-product-detail__left` for the modal), so it never
+competes for space with anything the site itself sized.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's

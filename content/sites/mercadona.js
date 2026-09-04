@@ -35,7 +35,12 @@ OrigEU.init({
     // <button>, not nested in it — inject into the card itself, positioned
     // before that sibling, so the badge lands outside the button (a badge
     // inside it would also open the product-detail modal on click, breaking
-    // its own "unknown brand" click-to-suggest behavior).
+    // its own "unknown brand" click-to-suggest behavior). content/common.css
+    // then makes the badge an absolute-positioned overlay on the card
+    // ([data-testid="product-cell"] > .origeu-badges) rather than flow
+    // content — the grid cells have a fixed height with the cart controls
+    // pinned to the bottom, so leaving the badge in normal flow pushed them
+    // down past the cell's own boundary.
     getInjectTarget(card) {
       return card;
     },
@@ -79,12 +84,26 @@ OrigEU.init({
     getProductInjectTarget() {
       const h1 = document.querySelector('.private-product-detail__description');
       if (!h1) return null;
-      // .origeu-anchor (content/common.css) resets position/display so the
-      // badge isn't caught by whatever layout rule the host page applies to
-      // that DOM slot — same anchor-after-title trick the other standalone
-      // adapters use. Inserted right after the <h1> itself, rather than
-      // appended at the end of its parent, since that parent also holds the
-      // format/price rows below the title.
+      // The modal's right-hand column pins "Añadir al carro" to the bottom
+      // of a fixed-height flex column (matched to the image gallery's
+      // height on the left) — inserting the badge after the <h1> pushed
+      // that button down past the column's own boundary, hiding it
+      // entirely. Overlaying it on the product image instead (the same fix
+      // sfcc-common.js uses for auchan.pt's PDP, via .origeu-anchor--overlay
+      // in content/common.css) sidesteps that fixed height budget rather
+      // than trying to fit inside it.
+      const imageContainer = document.querySelector('.private-product-detail__left');
+      if (imageContainer) {
+        let anchor = imageContainer.querySelector(':scope > .origeu-anchor');
+        if (!anchor) {
+          anchor = document.createElement('div');
+          anchor.className = 'origeu-anchor origeu-anchor--overlay';
+          imageContainer.insertAdjacentElement('afterbegin', anchor);
+        }
+        return anchor;
+      }
+      // Fall through to the after-<h1> strategy if the image container
+      // isn't found (e.g. site markup changed).
       const container = h1.parentElement;
       if (!container) return null;
       let anchor = container.querySelector(':scope > .origeu-anchor');
