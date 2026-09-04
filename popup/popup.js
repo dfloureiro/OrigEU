@@ -29,6 +29,14 @@ async function init() {
     setSettings({ hideUnknown: hideUnknownEl.checked });
   });
 
+  // Same opposite-polarity pattern as hideUnknown above: defaults to false,
+  // checked only when explicitly true.
+  const unBrexitEl = document.getElementById('unBrexit');
+  unBrexitEl.checked = settings.unBrexit === true;
+  unBrexitEl.addEventListener('change', () => {
+    setSettings({ unBrexit: unBrexitEl.checked });
+  });
+
   const detailSelect = document.getElementById('detail');
   detailSelect.value = ['short', 'medium'].includes(settings.detail) ? settings.detail : 'long';
   detailSelect.addEventListener('change', () => {

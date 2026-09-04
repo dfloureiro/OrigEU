@@ -6,7 +6,7 @@
   // Mirrors lib/settings.js — duplicated here because content scripts can't
   // use ES module imports the way the background/popup scripts do.
   const SETTINGS_KEY = 'origeu_settings';
-  const DEFAULT_SETTINGS = { eu: true, detail: 'long', hideUnknown: false };
+  const DEFAULT_SETTINGS = { eu: true, detail: 'long', hideUnknown: false, unBrexit: false };
   const KIND_CLASS = { eu: 'origeu-pill--kind-eu' };
   const UNKNOWN_CLASS = 'origeu-pill--eu-unknown';
   let currentSettings = { ...DEFAULT_SETTINGS };
@@ -75,6 +75,45 @@
     return ['short', 'medium', 'long'].includes(currentSettings.detail) ? currentSettings.detail : 'long';
   }
 
+  // Purely cosmetic: when the unBrexit setting is on, a badge whose country
+  // is the United Kingdom displays as if it were an EU member — nothing
+  // about the underlying result (citation link, "suggest a correction"
+  // prefill, the cached lookup itself) changes, only what's rendered here.
+  // Takes/returns the {status, code, region} triple euPill() builds from
+  // the lookup result, applied fresh on every render (not baked into
+  // data-origeu-state, which stays the raw, factual status) so toggling
+  // the setting updates already-rendered badges immediately, the same way
+  // detailLevel() does.
+  function applyUnBrexit(state) {
+    if (currentSettings.unBrexit && state.code === 'GB' && state.status === 'non-eu') {
+      return { status: 'eu', code: state.code, region: null };
+    }
+    return state;
+  }
+
+  // className + tooltip for a given (post-unBrexit) state — pulled out of
+  // euPill() so applyDetailLevel() can also call it, to keep an
+  // already-rendered badge's color and tooltip in sync when unBrexit (or
+  // in principle any other state-affecting setting) changes.
+  function badgeVisuals(state) {
+    if (state.status === 'eu') {
+      return {
+        className: 'origeu-pill--eu-yes',
+        tooltip: chrome.i18n.getMessage('tooltipEu', [countryLabel(state.code) || 'UE'])
+      };
+    } else if (state.status === 'non-eu' && state.region === 'efta') {
+      const label = countryLabel(state.code) || 'EFTA';
+      return { className: 'origeu-pill--eu-efta', tooltip: chrome.i18n.getMessage('tooltipEfta', [label]) };
+    } else if (state.status === 'non-eu') {
+      const label = countryLabel(state.code);
+      return {
+        className: 'origeu-pill--eu-no',
+        tooltip: label ? chrome.i18n.getMessage('tooltipNonEuCountry', [label]) : chrome.i18n.getMessage('tooltipNonEuGeneric')
+      };
+    }
+    return { className: UNKNOWN_CLASS, tooltip: chrome.i18n.getMessage('tooltipUnknown') };
+  }
+
   // Same live-update idea as applyVisibility(), but for the badge's text
   // content rather than its display: euPill() stashes the minimal facts
   // needed to redraw a badge (status/country/region) on the element itself
@@ -83,14 +122,25 @@
   function applyDetailLevel() {
     const level = detailLevel();
     document.querySelectorAll(`.${KIND_CLASS.eu}[data-origeu-state]`).forEach((el) => {
-      let state;
+      let rawState;
       try {
-        state = JSON.parse(el.getAttribute('data-origeu-state'));
+        rawState = JSON.parse(el.getAttribute('data-origeu-state'));
       } catch (err) {
         return;
       }
+      const state = applyUnBrexit(rawState);
       const textEl = el.querySelector('.origeu-pill__text');
       if (textEl) textEl.textContent = computeBadgeText(state, level);
+      // Re-derive className/tooltip too (not just text) so toggling
+      // unBrexit updates an already-rendered badge's color and tooltip
+      // immediately, not just its label. A no-op for everyone else: with
+      // unBrexit off, applyUnBrexit(rawState) === rawState, so this always
+      // recomputes the same values the badge already had.
+      const { className, tooltip } = badgeVisuals(state);
+      el.classList.remove('origeu-pill--eu-yes', 'origeu-pill--eu-efta', 'origeu-pill--eu-no', UNKNOWN_CLASS);
+      el.classList.add(className);
+      el.setAttribute('data-origeu-tip', tooltip);
+      el.setAttribute('aria-label', tooltip);
     });
   }
 
@@ -275,34 +325,19 @@
   function euPill(result, productName) {
     const link = citationLink(result);
     const note = brandNote(result);
-    const state = (result && result.euStatus !== 'unknown')
+    const rawState = (result && result.euStatus !== 'unknown')
       ? { status: result.euStatus, code: result.euCountryCode || null, region: result.euRegion || null }
       : { status: 'unknown', code: null, region: null };
+    const state = applyUnBrexit(rawState);
     const text = computeBadgeText(state, detailLevel());
-
-    let className;
-    let tooltip;
-    if (state.status === 'eu') {
-      className = 'origeu-pill--eu-yes';
-      tooltip = chrome.i18n.getMessage('tooltipEu', [countryLabel(state.code) || 'UE']);
-    } else if (state.status === 'non-eu' && state.region === 'efta') {
-      className = 'origeu-pill--eu-efta';
-      const label = countryLabel(state.code) || 'EFTA';
-      tooltip = chrome.i18n.getMessage('tooltipEfta', [label]);
-    } else if (state.status === 'non-eu') {
-      className = 'origeu-pill--eu-no';
-      const label = countryLabel(state.code);
-      tooltip = label
-        ? chrome.i18n.getMessage('tooltipNonEuCountry', [label])
-        : chrome.i18n.getMessage('tooltipNonEuGeneric');
-    } else {
-      className = UNKNOWN_CLASS;
-      tooltip = chrome.i18n.getMessage('tooltipUnknown');
-    }
+    const { className, tooltip } = badgeVisuals(state);
 
     const el = pill(className, text, tooltip, link, 'eu', note);
-    el.setAttribute('data-origeu-state', JSON.stringify(state));
-    if (state.status === 'unknown') {
+    // The raw, factual state — not the unBrexit-adjusted one — so toggling
+    // the setting later (applyDetailLevel) can correctly re-derive either
+    // direction instead of baking today's rendering in permanently.
+    el.setAttribute('data-origeu-state', JSON.stringify(rawState));
+    if (rawState.status === 'unknown') {
       el.setAttribute('data-origeu-suggest', productName || '');
     } else {
       const editPayload = suggestEditPayload(result);

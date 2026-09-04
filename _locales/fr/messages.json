@@ -15,6 +15,9 @@
   "popupToggleHideUnknown": {
     "message": "❓ Masquer les badges d'origine inconnue"
   },
+  "popupToggleUnBrexit": {
+    "message": "🇬🇧 Traiter le Royaume-Uni comme un pays de l'UE (unBrexit)"
+  },
   "popupDetailStyleLabel": {
     "message": "Style du badge"
   },

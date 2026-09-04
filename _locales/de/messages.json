@@ -15,6 +15,9 @@
   "popupToggleHideUnknown": {
     "message": "❓ Siegel für unbekannte Herkunft ausblenden"
   },
+  "popupToggleUnBrexit": {
+    "message": "🇬🇧 Vereinigtes Königreich als EU behandeln (unBrexit)"
+  },
   "popupDetailStyleLabel": {
     "message": "Siegelstil"
   },

@@ -15,6 +15,9 @@
   "popupToggleHideUnknown": {
     "message": "❓ Ocultar sellos de origen desconocido"
   },
+  "popupToggleUnBrexit": {
+    "message": "🇬🇧 Tratar el Reino Unido como UE (unBrexit)"
+  },
   "popupDetailStyleLabel": {
     "message": "Estilo del sello"
   },
