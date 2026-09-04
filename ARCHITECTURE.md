@@ -161,7 +161,7 @@ current markup (retailers restyle their sites over time).
 manifest.json                    # Chrome/Chromium MV3 manifest
 manifest.firefox.json            # Firefox MV3 manifest — background.scripts instead of service_worker,
                                   # plus browser_specific_settings; kept in sync with manifest.json by hand
-_locales/pt_PT/messages.json, _locales/en/messages.json   # chrome.i18n UI text, matched to browser language
+_locales/{pt_PT,en,es,de,it,fr}/messages.json   # chrome.i18n UI text, matched to browser language
 background/background.js         # service worker: matches the own brand database + caching + clear-cache action
 lib/config.example.js            # template for lib/config.js (gitignored) — your own backend URL, never committed
 lib/own-brands.js                # own database client: indexing, matching (see backend/)

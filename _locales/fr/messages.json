@@ -1,0 +1,138 @@
+{
+  "extName": {
+    "message": "OrigEU — Origine UE"
+  },
+  "extDescription": {
+    "message": "Indique si un produit est d'origine UE (ou AELE) sur Continente, Pingo Doce, Auchan et Intermarché."
+  },
+
+  "popupSubtitle": {
+    "message": "Badges d'origine UE/AELE sur les sites des supermarchés portugais"
+  },
+  "popupToggleEu": {
+    "message": "🇪🇺 Afficher le badge d'origine sur les produits"
+  },
+  "popupToggleHideUnknown": {
+    "message": "❓ Masquer les badges d'origine inconnue"
+  },
+  "popupDetailStyleLabel": {
+    "message": "Style du badge"
+  },
+  "popupDetailLong": {
+    "message": "Long — OrigEU ❤️ Portugal 🇵🇹"
+  },
+  "popupDetailMedium": {
+    "message": "Moyen — OrigEU ❤️ 🇵🇹"
+  },
+  "popupDetailShort": {
+    "message": "Court — 🇵🇹"
+  },
+  "popupClearCache": {
+    "message": "🔄 Vider le cache"
+  },
+  "popupClearingCache": {
+    "message": "Suppression…"
+  },
+  "popupClearCacheHint": {
+    "message": "Utilisez ceci si les badges semblent obsolètes ou incorrects."
+  },
+  "popupCacheCleared": {
+    "message": "Cache vidé — actualisez la page du site pour voir les données les plus récentes."
+  },
+  "popupDonate": {
+    "message": "💛 Soutenir OrigEU"
+  },
+
+  "badgeEu": {
+    "message": "OrigEU ❤️ $1 $2",
+    "description": "Long-form EU badge text",
+    "placeholders": {
+      "1": { "content": "$1", "example": "Portugal" },
+      "2": { "content": "$2", "example": "🇵🇹" }
+    }
+  },
+  "badgeEfta": {
+    "message": "OrigEU 🤝 $1 $2 (AELE)",
+    "description": "Long-form EFTA badge text"
+  },
+  "badgeNonEuCountry": {
+    "message": "OrigEU 🌍 $1 $2",
+    "description": "Long-form non-EU badge text, country known"
+  },
+  "badgeNonEuGeneric": {
+    "message": "OrigEU 🌍 Hors UE",
+    "description": "Long-form non-EU badge text, country unknown"
+  },
+  "badgeUnknown": {
+    "message": "OrigEU ❓ Origine inconnue",
+    "description": "Long-form badge text for a brand not in the database"
+  },
+
+  "tooltipEu": {
+    "message": "OrigEU : produit originaire de $1 (Union européenne)."
+  },
+  "tooltipEfta": {
+    "message": "OrigEU : produit originaire de $1 — un pays de l'AELE (Association Européenne de Libre-Échange) : hors UE, mais étroitement intégré sur le plan économique et réglementaire (marché unique/EEE ou accords bilatéraux)."
+  },
+  "tooltipNonEuCountry": {
+    "message": "OrigEU : origine hors de l'Union européenne ($1)."
+  },
+  "tooltipNonEuGeneric": {
+    "message": "OrigEU : origine hors de l'Union européenne."
+  },
+  "tooltipUnknown": {
+    "message": "OrigEU : cette marque n'est pas encore dans la base de données — cliquez pour la suggérer."
+  },
+  "tooltipLoading": {
+    "message": "OrigEU : recherche des données en cours."
+  },
+  "citationLinkLabel": {
+    "message": "Voir la source ↗"
+  },
+  "suggestEditLabel": {
+    "message": "Suggérer une correction"
+  },
+  "loadingBadgeFull": {
+    "message": "OrigEU vérifie…"
+  },
+
+  "suggestTitle": {
+    "message": "Suggérer une marque"
+  },
+  "suggestEditTitle": {
+    "message": "Suggérer une correction pour cette marque"
+  },
+  "suggestClose": {
+    "message": "Fermer"
+  },
+  "suggestBrandLabel": {
+    "message": "Marque"
+  },
+  "suggestCountryLabel": {
+    "message": "Pays d'origine"
+  },
+  "suggestSourceLabel": {
+    "message": "Source (URL, facultatif)"
+  },
+  "suggestSourceInvalid": {
+    "message": "La source doit être un lien https:// valide."
+  },
+  "suggestNotesLabel": {
+    "message": "Notes (facultatif)"
+  },
+  "suggestHint": {
+    "message": "Envoyé pour révision — ne s'affichera pas immédiatement comme marque UE/hors UE."
+  },
+  "suggestSuccess": {
+    "message": "Merci ! Suggestion envoyée pour révision."
+  },
+  "suggestSubmit": {
+    "message": "Envoyer la suggestion"
+  },
+  "suggestSubmitting": {
+    "message": "Envoi…"
+  },
+  "suggestGenericError": {
+    "message": "Erreur lors de l'envoi. Réessayez."
+  }
+}
