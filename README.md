@@ -2,7 +2,7 @@
 
 A small browser extension (Chrome and Firefox) that tells you where a
 product actually comes from, right while you're shopping online at a
-Portuguese supermarket.
+supported supermarket.
 
 It adds a little badge to each product — on the search/listing page and on
 the product page — showing whether that brand is from the EU, from a
@@ -42,6 +42,7 @@ full text shown above and a compact flag-only style.
 
 - continente.pt
 - auchan.pt
+- auchan.fr
 - pingodoce.pt
 - intermarche.pt
 
@@ -83,8 +84,8 @@ Firefox:
   and self-sign it, or submit it to
   [addons.mozilla.org](https://addons.mozilla.org))
 
-Then visit continente.pt, auchan.pt, pingodoce.pt or intermarche.pt and
-search for a product.
+Then visit continente.pt, auchan.pt, auchan.fr, pingodoce.pt or
+intermarche.pt and search for a product.
 
 > **Why two manifests?** Chrome's Manifest V3 validator rejects
 > `background.scripts` outright, while Firefox's Manifest V3 support

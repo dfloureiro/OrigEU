@@ -66,6 +66,7 @@ out of date", not "every EU country looks non-EU".
 |---|---|---|
 | continente.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter |
 | auchan.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter |
+| auchan.fr | Custom server-rendered platform (confirmed) | Standalone adapter (`content/sites/auchan-fr.js`) |
 | pingodoce.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter, with overrides |
 | intermarche.pt | Custom Next.js/React (confirmed) | Standalone adapter (`content/sites/intermarche.js`) |
 
@@ -136,6 +137,29 @@ to the PDP on click, breaking the "unknown brand" click-to-suggest
 behavior. The PDP's brand is a separate element too (`.productDetail__brand`
 next to `h1.productDetail__main_title`), folded in the same way.
 
+auchan.fr is a *different retailer country site* on a *different platform*
+from auchan.pt — same brand, not the same storefront. Auchan runs at least
+five distinct platforms across its EU country sites (SFCC on .pt, a custom
+Node platform on .fr, a Vue.js SPA on .pl, PrestaShop on .lu, VTEX on .ro),
+so there's no shared adapter across countries the way there is for the
+three Portuguese SFCC sites — each Auchan country needs its own
+from-scratch selectors, same as any other retailer. `content/sites/
+auchan-fr.js` is a standalone config verified against auchan.fr's own
+server-rendered HTML (a category page, a search-results page, and a
+product page) — unlike intermarche.pt, this site has no bot-protection
+blocking a plain fetch, so no browser DevTools copy-paste was needed.
+Listing tiles (`.product-thumbnail[data-id]`, identical shape on both
+category and search-results pages) carry the brand pre-folded into the
+name text via a `<strong itemprop="brand">` inside
+`.product-thumbnail__description` — no separate brand-folding needed,
+same reason intermarche.pt's `data-name` attribute doesn't need it either.
+The badge is injected as a sibling of the card's `<a>` (into
+`.product-thumbnail__content-wrapper`, before its `<footer>`), same
+click-to-suggest reasoning as intermarche.pt. The PDP's brand is a
+separate element (`.offer-selector__brand` next to a bare `<h1>` inside
+`.offer-selector__name--large`), folded in by hand like the other
+non-SFCC sites.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -148,11 +172,12 @@ current markup (retailers restyle their sites over time).
    this extension to see console warnings
 4. Update the relevant selectors — the three SFCC sites share
    `content/sites/sfcc-common.js` (`cardSelector`, `nameSelectors`,
-   `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan use its
+   `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan (.pt) use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
-   (`content/sites/pingodoce.js`). intermarche.pt doesn't use that shared
-   file at all — its selectors live directly in
-   `content/sites/intermarche.js`
+   (`content/sites/pingodoce.js`). intermarche.pt and auchan.fr don't use
+   that shared file at all — their selectors live directly in
+   `content/sites/intermarche.js` and `content/sites/auchan-fr.js`
+   respectively
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
 ## Project layout
@@ -177,10 +202,12 @@ popup/popup.html, popup.js       # toolbar popup: show/hide the badge, clear cac
 content/countries.js             # country code -> label/flag translation, loaded before common.js
 content/common.js                # shared badge rendering, messaging, scanning, tooltips
 content/common.css               # badge + tooltip styles
-content/sites/sfcc-common.js     # shared adapter for all three sites (SFCC)
+content/sites/sfcc-common.js     # shared adapter for the three .pt SFCC sites
 content/sites/continente.js
 content/sites/auchan.js
 content/sites/pingodoce.js       # sfcc-common.js + overrides for renamed classes
+content/sites/intermarche.js     # standalone adapter — custom Next.js/React platform
+content/sites/auchan-fr.js       # standalone adapter — different platform from auchan.pt
 backend/                         # own brand database: Cloudflare Workers + D1 + backoffice (see backend/README.md)
 ```
 

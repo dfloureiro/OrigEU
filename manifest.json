@@ -23,6 +23,7 @@
     "https://www.continente.pt/*",
     "https://www.pingodoce.pt/*",
     "https://www.auchan.pt/*",
+    "https://www.auchan.fr/*",
     "https://intermarche.pt/*",
     "https://www.intermarche.pt/*",
     "https://*.workers.dev/*"
@@ -41,6 +42,12 @@
     {
       "matches": ["https://www.auchan.pt/*"],
       "js": ["content/countries.js", "content/common.js", "content/sites/sfcc-common.js", "content/sites/auchan.js"],
+      "css": ["content/common.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.auchan.fr/*"],
+      "js": ["content/countries.js", "content/common.js", "content/sites/auchan-fr.js"],
       "css": ["content/common.css"],
       "run_at": "document_idle"
     },
