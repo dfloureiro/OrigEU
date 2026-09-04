@@ -237,6 +237,7 @@ async function initForm() {
       form.notesEs.value = brand.notesEs || '';
       form.notesFr.value = brand.notesFr || '';
       form.notesDe.value = brand.notesDe || '';
+      form.notesIt.value = brand.notesIt || '';
       form.active.checked = Boolean(brand.active);
       if (pendingId) {
         // Overlay the suggested fields on top of the brand's current, just-
@@ -285,6 +286,7 @@ async function initForm() {
       notesEs: form.notesEs.value.trim() || null,
       notesFr: form.notesFr.value.trim() || null,
       notesDe: form.notesDe.value.trim() || null,
+      notesIt: form.notesIt.value.trim() || null,
       active: form.active.checked
     };
     try {

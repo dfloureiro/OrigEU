@@ -60,8 +60,8 @@ export default {
             schemaVersion: 1,
             source: 'origeu-own',
             generatedAt: new Date().toISOString(),
-            brands: brands.map(({ id, name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, notesDe, addedAt, updatedAt }) => ({
-              id, name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, notesDe, addedAt, updatedAt
+            brands: brands.map(({ id, name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, notesDe, notesIt, addedAt, updatedAt }) => ({
+              id, name, aliases, countries, source, notesEn, notesPt, notesEs, notesFr, notesDe, notesIt, addedAt, updatedAt
             }))
           };
         });
