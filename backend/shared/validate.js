@@ -54,6 +54,9 @@ export function validateBrand(payload, { requireId } = { requireId: true }) {
   if (payload.notesPt && String(payload.notesPt).length > 1000) {
     errors.push('notesPt is too long (max. 1000 characters)');
   }
+  if (payload.notesEs && String(payload.notesEs).length > 1000) {
+    errors.push('notesEs is too long (max. 1000 characters)');
+  }
   return errors;
 }
 
@@ -116,6 +119,7 @@ export function normalizeBrandInput(payload) {
     source: payload.source ? String(payload.source).trim() : null,
     notesEn: payload.notesEn ? String(payload.notesEn).trim() : null,
     notesPt: payload.notesPt ? String(payload.notesPt).trim() : null,
+    notesEs: payload.notesEs ? String(payload.notesEs).trim() : null,
     active: payload.active === false ? 0 : 1
   };
 }

@@ -11,6 +11,7 @@ function rowToBrand(row) {
     source: row.source,
     notesEn: row.notes_en,
     notesPt: row.notes_pt,
+    notesEs: row.notes_es,
     addedAt: row.added_at,
     updatedAt: row.updated_at,
     active: Boolean(row.active)
@@ -49,21 +50,21 @@ export async function getById(db, id) {
   return rowToBrand(row);
 }
 
-export async function create(db, { id, name, aliases, countries, source, notesEn, notesPt, active }) {
+export async function create(db, { id, name, aliases, countries, source, notesEn, notesPt, notesEs, active }) {
   const now = new Date().toISOString();
   await db.prepare(`
-    INSERT INTO brands (id, name, aliases, countries, source, notes_en, notes_pt, added_at, updated_at, active)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).bind(id, name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, now, now, active).run();
+    INSERT INTO brands (id, name, aliases, countries, source, notes_en, notes_pt, notes_es, added_at, updated_at, active)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(id, name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, notesEs, now, now, active).run();
   return getById(db, id);
 }
 
-export async function update(db, id, { name, aliases, countries, source, notesEn, notesPt, active }) {
+export async function update(db, id, { name, aliases, countries, source, notesEn, notesPt, notesEs, active }) {
   const now = new Date().toISOString();
   await db.prepare(`
-    UPDATE brands SET name = ?, aliases = ?, countries = ?, source = ?, notes_en = ?, notes_pt = ?, updated_at = ?, active = ?
+    UPDATE brands SET name = ?, aliases = ?, countries = ?, source = ?, notes_en = ?, notes_pt = ?, notes_es = ?, updated_at = ?, active = ?
     WHERE id = ?
-  `).bind(name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, now, active, id).run();
+  `).bind(name, JSON.stringify(aliases), JSON.stringify(countries), source, notesEn, notesPt, notesEs, now, active, id).run();
   return getById(db, id);
 }
 

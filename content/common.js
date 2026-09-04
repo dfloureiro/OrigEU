@@ -192,8 +192,18 @@
   function brandNote(result) {
     const sig = result && result.euSignals && result.euSignals[0];
     if (!sig) return null;
-    const preferPt = (navigator.language || '').toLowerCase().startsWith('pt');
-    return (preferPt ? (sig.notesPt || sig.notesEn) : (sig.notesEn || sig.notesPt)) || null;
+    const lang = (navigator.language || '').toLowerCase();
+    const byLang = { pt: sig.notesPt, es: sig.notesEs, en: sig.notesEn };
+    const preferred = lang.startsWith('pt') ? 'pt' : lang.startsWith('es') ? 'es' : 'en';
+    // Preferred language first, then fall back through the rest (en before
+    // pt/es as the most likely to be populated — see backend/README.md) so
+    // a note that only exists in one language still shows up rather than
+    // nothing. Dedup since `preferred` may already be one of them.
+    const order = [preferred, 'en', 'pt', 'es'].filter((l, i, arr) => arr.indexOf(l) === i);
+    for (const l of order) {
+      if (byLang[l]) return byLang[l];
+    }
+    return null;
   }
 
   // Data for the "suggest a correction" button shown in a *known*-brand
