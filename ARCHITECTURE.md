@@ -71,6 +71,7 @@ out of date", not "every EU country looks non-EU".
 | intermarche.pt | Custom Next.js/React (confirmed) | Standalone adapter (`content/sites/intermarche.js`) |
 | tienda.mercadona.es | Custom React SPA (confirmed) | Standalone adapter (`content/sites/mercadona.js`) |
 | carrefour.es | Custom Vue SPA (confirmed) | Standalone adapter (`content/sites/carrefour-es.js`) |
+| carrefour.fr | Custom Vue SPA, unrelated markup to .es (confirmed) | Standalone adapter (`content/sites/carrefour-fr.js`) |
 
 All three run on Salesforce Commerce Cloud (SFRA) — Pingo Doce couldn't be
 fingerprinted remotely early on (it 403s requests without a real
@@ -225,6 +226,30 @@ generic version of the same overlay rule to key on — reusable by any future
 site with the same "no addressable class, just a structural relationship
 to a `data-test` anchor" problem.
 
+carrefour.fr is a genuinely different site from carrefour.es — same
+Cloudflare bot-management challenge blocking a plain fetch, but completely
+unrelated markup underneath, confirming Carrefour doesn't share a platform
+across countries any more than Auchan does.
+`content/sites/carrefour-fr.js`'s single listing-tile component
+(`.product-card-vertical-grid-new`) is reused for the sponsored slot, two
+different recommendation carousels, and (per a `product-list-card-plp-grid-
+new__per-unit-label` class nested in its price block) the real
+search-results grid too — one selector covers all of them. Its title text
+also redundantly folds the brand in at the *end* (e.g. "...FEBREZE",
+"...CARREFOUR ESSENTIAL"), same as carrefour.es, so no brand-folding logic
+needed; and unlike carrefour.es's two tile shapes, its buy button lives in
+a completely separate DOM branch from the title, so there's no shared
+fixed-height column risking the same "button pushed out of view" bug —
+plain placement is enough. The PDP is the interesting part: its `<h1>` is
+rendered *twice*, once in a mobile-only block and once in a desktop-only
+one, toggled by a CSS media query rather than by JS, so picking the first
+DOM match would badge whichever copy happens to be hidden at the current
+viewport width half the time. `visibleTitleH1()` checks `offsetParent`
+(`null` when an ancestor is `display:none`) to find the one actually on
+screen, re-checked on every scan (`content/common.js`'s scan loop already
+re-runs on every DOM mutation and every 2s) so a window resize across the
+breakpoint gets picked up too.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -240,10 +265,11 @@ current markup (retailers restyle their sites over time).
    `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan (.pt) use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
    (`content/sites/pingodoce.js`). intermarche.pt, auchan.fr,
-   tienda.mercadona.es, and carrefour.es don't use that shared file at all
-   — their selectors live directly in `content/sites/intermarche.js`,
-   `content/sites/auchan-fr.js`, `content/sites/mercadona.js`, and
-   `content/sites/carrefour-es.js` respectively
+   tienda.mercadona.es, carrefour.es, and carrefour.fr don't use that
+   shared file at all — their selectors live directly in
+   `content/sites/intermarche.js`, `content/sites/auchan-fr.js`,
+   `content/sites/mercadona.js`, `content/sites/carrefour-es.js`, and
+   `content/sites/carrefour-fr.js` respectively
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
 ## Project layout
@@ -276,6 +302,7 @@ content/sites/intermarche.js     # standalone adapter — custom Next.js/React p
 content/sites/auchan-fr.js       # standalone adapter — different platform from auchan.pt
 content/sites/mercadona.js       # standalone adapter — client-rendered React SPA
 content/sites/carrefour-es.js    # standalone adapter — client-rendered Vue SPA
+content/sites/carrefour-fr.js    # standalone adapter — unrelated markup to carrefour-es.js
 backend/                         # own brand database: Cloudflare Workers + D1 + backoffice (see backend/README.md)
 ```
 
