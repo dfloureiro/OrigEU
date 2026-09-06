@@ -4,8 +4,8 @@ _Last updated: 2026-09-04_
 
 OrigEU is a browser extension that shows the country of origin of
 supermarket products, directly on Continente, Auchan, Pingo Doce,
-Intermarché, and Mercadona's websites. This page explains what the
-extension does and does not do with your data.
+Intermarché, Mercadona, and Carrefour's websites. This page explains what
+the extension does and does not do with your data.
 
 ## Short version
 
@@ -15,9 +15,9 @@ non-personal data. Nothing you browse or buy is ever sent anywhere.
 
 ## What the extension reads
 
-On continente.pt, auchan.pt, auchan.fr, pingodoce.pt, intermarche.pt, and
-tienda.mercadona.es, the extension's content script reads the product name
-text already visible on
+On continente.pt, auchan.pt, auchan.fr, pingodoce.pt, intermarche.pt,
+tienda.mercadona.es, and carrefour.es, the extension's content script
+reads the product name text already visible on
 the page — the same text you can see yourself — to check it against a
 local database of brands. This check happens entirely inside your
 browser. The product name
@@ -68,8 +68,8 @@ The extension requests:
 
 - **`storage`** — for the local preferences/cache described above.
 - **Host access to continente.pt, auchan.pt, auchan.fr, pingodoce.pt,
-  intermarche.pt, tienda.mercadona.es** — to inject the badge into those
-  sites' pages.
+  intermarche.pt, tienda.mercadona.es, carrefour.es** — to inject the badge
+  into those sites' pages.
 - **Host access to `*.workers.dev`** — to fetch the public brand database
   from our own Cloudflare Worker.
 

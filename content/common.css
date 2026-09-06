@@ -127,6 +127,30 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* carrefour.es's grid cells have the same shape as mercadona.es's above —
+   an add-to-cart footer pinned to the bottom of the card, sibling of the
+   title block — so content/sites/carrefour-es.js injects into
+   .product-card__media (the image wrapper) instead, overlaid here rather
+   than left in the flow, to avoid the same push-the-button-down bug before
+   it ever shipped. */
+.product-card__media {
+  position: relative;
+}
+.product-card__media > .origeu-badges {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  max-width: calc(100% - 8px);
+  margin: 0 !important;
+  z-index: 2;
+}
+.product-card__media > .origeu-badges .origeu-pill {
+  padding: 2px 7px;
+  font-size: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
 /* Mercadona's product-detail modal pins its "Añadir al carro" button to the
    bottom of a fixed-height right-hand column (matched to the image
    gallery's height on the left) — same "no slack for extra content"

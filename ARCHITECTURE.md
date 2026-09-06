@@ -70,6 +70,7 @@ out of date", not "every EU country looks non-EU".
 | pingodoce.pt | Salesforce Commerce Cloud (confirmed) | Shared SFCC adapter, with overrides |
 | intermarche.pt | Custom Next.js/React (confirmed) | Standalone adapter (`content/sites/intermarche.js`) |
 | tienda.mercadona.es | Custom React SPA (confirmed) | Standalone adapter (`content/sites/mercadona.js`) |
+| carrefour.es | Custom Vue SPA (confirmed) | Standalone adapter (`content/sites/carrefour-es.js`) |
 
 All three run on Salesforce Commerce Cloud (SFRA) — Pingo Doce couldn't be
 fingerprinted remotely early on (it 403s requests without a real
@@ -191,6 +192,22 @@ overlay instead of flow content (`[data-testid="product-cell"] >
 anchored to `.private-product-detail__left` for the modal), so it never
 competes for space with anything the site itself sized.
 
+carrefour.es sits behind a Cloudflare bot-management challenge ("Attention
+Required!") that blocks a plain fetch the same way intermarche.pt's
+DataDome does, so `content/sites/carrefour-es.js`'s selectors were also
+verified from real markup copied out of a live browser's DevTools. Its
+listing tile (`.product-card`) has the exact same shape as
+mercadona.es's — an add-to-cart footer (`.product-card__footer`) pinned to
+the bottom of the card, sibling of the title block
+(`.product-card__detail`) — so this one shipped with the overlay-on-image
+fix from the start (`.product-card__media > .origeu-badges` in
+`content/common.css`) rather than waiting for the same bug to get reported
+again. Its title text also already folds the brand in (e.g. "...Garnier
+400 ml.", "...Oral-B pack 3 unidades..."), so no brand-folding needed
+either. The PDP (`.product-header__name` inside `.pdp-view__left`) showed
+no sign of the same fixed-height squeeze in the markup that was checked,
+so it uses the plain after-`<h1>` placement instead of an overlay.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -205,11 +222,11 @@ current markup (retailers restyle their sites over time).
    `content/sites/sfcc-common.js` (`cardSelector`, `nameSelectors`,
    `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan (.pt) use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
-   (`content/sites/pingodoce.js`). intermarche.pt, auchan.fr, and
-   tienda.mercadona.es don't use that shared file at all — their selectors
-   live directly in `content/sites/intermarche.js`,
-   `content/sites/auchan-fr.js`, and `content/sites/mercadona.js`
-   respectively
+   (`content/sites/pingodoce.js`). intermarche.pt, auchan.fr,
+   tienda.mercadona.es, and carrefour.es don't use that shared file at all
+   — their selectors live directly in `content/sites/intermarche.js`,
+   `content/sites/auchan-fr.js`, `content/sites/mercadona.js`, and
+   `content/sites/carrefour-es.js` respectively
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
 ## Project layout
@@ -241,6 +258,7 @@ content/sites/pingodoce.js       # sfcc-common.js + overrides for renamed classe
 content/sites/intermarche.js     # standalone adapter — custom Next.js/React platform
 content/sites/auchan-fr.js       # standalone adapter — different platform from auchan.pt
 content/sites/mercadona.js       # standalone adapter — client-rendered React SPA
+content/sites/carrefour-es.js    # standalone adapter — client-rendered Vue SPA
 backend/                         # own brand database: Cloudflare Workers + D1 + backoffice (see backend/README.md)
 ```
 

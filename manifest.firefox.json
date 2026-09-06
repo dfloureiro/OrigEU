@@ -35,6 +35,7 @@
     "https://intermarche.pt/*",
     "https://www.intermarche.pt/*",
     "https://tienda.mercadona.es/*",
+    "https://www.carrefour.es/*",
     "https://*.workers.dev/*"
   ],
   "background": {
@@ -75,6 +76,12 @@
     {
       "matches": ["https://tienda.mercadona.es/*"],
       "js": ["content/countries.js", "content/common.js", "content/sites/mercadona.js"],
+      "css": ["content/common.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.carrefour.es/*"],
+      "js": ["content/countries.js", "content/common.js", "content/sites/carrefour-es.js"],
       "css": ["content/common.css"],
       "run_at": "document_idle"
     }
