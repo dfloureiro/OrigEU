@@ -208,6 +208,23 @@ either. The PDP (`.product-header__name` inside `.pdp-view__left`) showed
 no sign of the same fixed-height squeeze in the markup that was checked,
 so it uses the plain after-`<h1>` placement instead of an overlay.
 
+The site turned out to ship a *second*, entirely different listing-tile
+component too — `article[data-test="search-grid-result"]`, verified from
+the search-results page, built by what looks like a separate Vue
+micro-frontend (atomic, versioned `x-*` utility classes rather than
+`.product-card__*`'s BEM-ish naming). `cardSelector` matches both shapes
+(comma-separated), and `getName`/`getInjectTarget` branch on which one
+matched via `card.matches(SEARCH_CARD_SELECTOR)`. Its picture is wrapped
+the opposite way around from `.product-card`'s: `[data-test="result-link"]`
+*is* the link, with no separate non-link wrapper inside it to overlay a
+badge onto — injecting there would make the badge also navigate to the PDP
+on click. Its parent (the picture column) isn't a link and has no stable
+class of its own, so the adapter tags it with a marker class
+(`.origeu-overlay-container`) via JS instead, giving `content/common.css` a
+generic version of the same overlay rule to key on — reusable by any future
+site with the same "no addressable class, just a structural relationship
+to a `data-test` anchor" problem.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's

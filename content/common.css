@@ -151,6 +151,31 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* Generic version of the overlay trick above, for a container that has no
+   stable class of its own to key a CSS rule on — carrefour.es's
+   search-results tile (content/sites/carrefour-es.js) is built entirely
+   from generic, versioned utility classes, so that adapter tags the
+   picture column with this marker class via JS instead of a site-specific
+   selector. Any future site in the same situation can reuse it the same
+   way rather than inventing another one-off rule. */
+.origeu-overlay-container {
+  position: relative;
+}
+.origeu-overlay-container > .origeu-badges {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  max-width: calc(100% - 8px);
+  margin: 0 !important;
+  z-index: 2;
+}
+.origeu-overlay-container > .origeu-badges .origeu-pill {
+  padding: 2px 7px;
+  font-size: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
 /* Mercadona's product-detail modal pins its "Añadir al carro" button to the
    bottom of a fixed-height right-hand column (matched to the image
    gallery's height on the left) — same "no slack for extra content"
