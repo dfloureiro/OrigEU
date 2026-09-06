@@ -234,19 +234,28 @@ across countries any more than Auchan does.
 component (`.product-card-vertical-grid-new`, verified from the sponsored
 slot and two recommendation carousels) also covered the real
 search-results grid, based on a class name (`product-list-card-plp-grid-
-new__per-unit-label`) glimpsed nested inside it — that guess was wrong. The
-real grid uses a second, differently-prefixed component
-(`.product-list-card-plp-grid-new`) that's near-identical on the inside
-(same `.product-card-title__text` for the name, same shape `__infos`
-sub-container) but not textually the same class, so both are matched
-(`cardSelector` lists both; the `__infos` inject-target lookup does too) —
-a lesson to actually verify a second card shape exists rather than infer
-it from a stray class name. Every example's title text redundantly folds
-the brand in at the *end* too (e.g. "...FEBREZE", "...DODOT"), same as
-carrefour.es, so no brand-folding logic needed either; and the buy/"Voir"
-button lives in a completely separate DOM branch from `.infos` in both
-shapes, so there's no shared fixed-height column risking the same "button
-pushed out of view" bug — plain placement is enough. The PDP is the
+new__per-unit-label`) glimpsed nested inside it — that guess was wrong,
+and a *third* shape (`.product-card-mini-reco`, a small sponsored-reco
+slot) turned up after that. Three verified shapes so far, likely not the
+last: `.product-card-vertical-grid-new` and `.product-list-card-plp-grid-
+new` both wrap the title `<a>` in an `__infos` container that holds
+*nothing else but the title* (and, on the carousel variant, a sibling
+reviews link); `.product-card-mini-reco` repurposes that same `__infos`
+class name for the pricing/buy-cta block instead, with the title `<a>` as
+a plain sibling with no dedicated wrapper at all. Hardcoding a container
+selector per shape stopped scaling at three, so `getInjectTarget` doesn't
+try — every shape's `.product-card-title__text` sits inside a clickable
+`<a>` regardless of what (if anything) wraps that `<a>`, so it finds that
+link generically via `.closest('a')` and uses *its* parent, whatever that
+happens to be named on the shape at hand — a lesson in resisting the urge
+to special-case a specific class name when the more general, stable fact
+is simply "title lives inside a link, don't badge inside that link
+itself". Every example's title text redundantly folds the brand in at the
+*end* too (e.g. "...FEBREZE", "...DODOT"), same as carrefour.es, so no
+brand-folding logic needed either; and the buy/"Voir" button never shares
+a fixed-height column with the title link's parent in any of the three
+shapes, so there's no risk of the same "button pushed out of view" bug
+carrefour-es.js hit — plain placement is enough. The PDP is the
 interesting part: its `<h1>` is
 rendered *twice*, once in a mobile-only block and once in a desktop-only
 one, toggled by a CSS media query rather than by JS, so picking the first

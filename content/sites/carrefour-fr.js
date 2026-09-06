@@ -4,25 +4,13 @@
 // (cf-mitigated: challenge), so these selectors are taken from real markup
 // copied out of a live browser's DevTools instead.
 //
-// Listing tile — the site actually ships *two* differently-prefixed but
-// near-identically-shaped components: .product-card-vertical-grid-new
-// (verified first, from the sponsored slot at the top of results and the
-// "Vous pourriez aussi aimer"/"Nos clients ont également acheté"
-// carousels — a guess that this same class also covered the real
-// search-results grid turned out to be wrong) and
-// .product-list-card-plp-grid-new (the real search-results grid, verified
-// separately once that guess was caught):
-//   <article class="... product-card-vertical-grid-new">    <!-- carousels/sponsored -->
-//     <div class="product-card-vertical-grid-new__body">
-//       <div class="product-card-vertical-grid-new__image">...</div>
-//       <div class="product-card-vertical-grid-new__container">
-//         ...price...
-//         <div class="product-card-vertical-grid-new__product-card-cta">
-//           ...buy button...
-//         </div>
-//       </div>
-//     </div>
-//     <div class="product-card-vertical-grid-new__meta">...size tag...</div>
+// Listing tile — the site turns out to ship *several* differently-prefixed
+// listing-tile components rather than one shared across every surface (a
+// guess that one covered both the carousels and the real search-results
+// grid was wrong, and a third, .product-card-mini-reco, showed up later
+// too — likely not the last one either). Three verified so far:
+//   <article class="... product-card-vertical-grid-new">    <!-- sponsored slot / recommendation carousels -->
+//     ...
 //     <div class="product-card-vertical-grid-new__right-section">
 //       <div class="product-card-vertical-grid-new__infos">
 //         <a class="... product-card-vertical-grid-new__title-container ...">
@@ -31,44 +19,60 @@
 //             Désodorisant Spray Pureté de Coton Brume d'air FEBREZE
 //           </p>
 //         </a>
-//         <a ...>...rating...</a>
+//         <a ...>...rating...</a>          <!-- sibling of the title link -->
 //       </div>
 //     </div>
 //   </article>
 //
-//   <article class="product-list-card-plp-grid-new">          <!-- real search grid -->
-//     <div class="product-list-card-plp-grid-new__body">
-//       <div class="product-list-card-plp-grid-new__image">...</div>
-//       <div class="product-list-card-plp-grid-new__right-section">
-//         <div class="product-list-card-plp-grid-new__infos">
-//           <a class="... product-list-card-plp-grid-new__title-container ...">
-//             <span class="c-link ... c-link--bold"> DODOT </span>
-//             <p class="... product-card-title__text ...">
-//               Couches Dodot Etapas 4 78 Unités DODOT
-//             </p>
-//           </a>
-//         </div>
-//         ...price, seller info, buy/"Voir" cta...
-//       </div>
+//   <article class="product-list-card-plp-grid-new">          <!-- real search-results grid -->
+//     ...
+//     <div class="product-list-card-plp-grid-new__infos">
+//       <a class="... product-list-card-plp-grid-new__title-container ...">
+//         <span class="c-link ... c-link--bold"> DODOT </span>
+//         <p class="... product-card-title__text ...">
+//           Couches Dodot Etapas 4 78 Unités DODOT
+//         </p>
+//       </a>
 //     </div>
 //   </article>
-// The inner pieces that matter here are identical between the two —
-// .product-card-title__text for the name, an "__infos" sub-container
-// holding just the title (and, on the carousel variant, a reviews link) —
-// only the outer BEM prefix and the exact nesting of .right-section
-// differ, so a single name getter and a two-selector-list inject target
-// cover both without needing to branch on which shape matched.
+//
+//   <article class="product-card-mini-reco">                  <!-- small sponsored reco slot -->
+//     <div class="product-card-mini-reco__body">
+//       <div class="product-card-mini-reco__left-section">...image, size tag...</div>
+//       <div class="product-card-mini-reco__infos">...pricing/buy-cta, NOT the title...</div>
+//       <a class="c-link product-card-click-wrapper ...">     <!-- sibling of .infos here, not inside it -->
+//         <p class="product-card-mini-reco__title product-card-title__text ...">
+//           Dentifrice Protection Caries SIGNAL
+//         </p>
+//       </a>
+//     </div>
+//   </article>
+// Given how much the container around the title link differs between
+// shapes — an "__infos" wrapper that holds *only* the title on one, the
+// same class name repurposed for pricing/cta on another, no dedicated
+// wrapper at all on the third — hardcoding a container selector per shape
+// doesn't scale. What's identical across all three: .product-card-title__text
+// for the name, and the title always sitting inside a clickable <a>. So
+// rather than special-case each shape's container, getInjectTarget below
+// finds that <a> generically and uses *its* parent, whatever that happens
+// to be named on the shape at hand.
 // Every example checked has the brand folded into the title text itself
 // too, redundantly with the separate brand <span> (e.g. "...FEBREZE",
-// "...DODOT") — no brand-folding needed, unlike pingodoce.js/intermarche.js.
-// The buy/"Voir" button lives outside .infos in both shapes, so there's no
-// shared fixed-height column risking the same "button pushed out of view"
-// bug carrefour-es.js hit — no overlay trick needed here.
-const LISTING_CARD_SELECTOR = '.product-card-vertical-grid-new, .product-list-card-plp-grid-new';
-const INFOS_SELECTOR = '.product-card-vertical-grid-new__infos, .product-list-card-plp-grid-new__infos';
+// "...DODOT", "...SIGNAL" is the one case where it isn't — the brand span
+// wasn't present in that markup at all, "Dentifrice Protection Caries
+// SIGNAL" already reads as a full product name) — no brand-folding needed.
+// The buy/"Voir" button never shares a fixed-height column with the title
+// link's parent in any of the three shapes, so there's no risk of the same
+// "button pushed out of view" bug carrefour-es.js hit — no overlay trick
+// needed here.
+const LISTING_CARD_SELECTOR = '.product-card-vertical-grid-new, .product-list-card-plp-grid-new, .product-card-mini-reco';
+
+function listingTitleEl(card) {
+  return card.querySelector('.product-card-title__text');
+}
 
 function listingName(card) {
-  const el = card.querySelector('.product-card-title__text');
+  const el = listingTitleEl(card);
   return el && el.textContent.replace(/\s+/g, ' ').trim();
 }
 
@@ -76,12 +80,16 @@ OrigEU.init({
   listing: {
     cardSelector: LISTING_CARD_SELECTOR,
     getName: listingName,
-    // .infos holds the title <a> (and, on the carousel variant, a separate
-    // reviews <a>) — appending here lands the badge outside those anchors
-    // (inside one would also navigate to the PDP on badge click, breaking
-    // the "unknown brand" click-to-suggest behavior).
     getInjectTarget(card) {
-      return card.querySelector(INFOS_SELECTOR) || card;
+      const title = listingTitleEl(card);
+      // The title text always sits inside a clickable <a> — injecting
+      // inside it would also navigate to the PDP on badge click, breaking
+      // the "unknown brand" click-to-suggest behavior. Landing the badge
+      // as a sibling of that link (in its parent) sidesteps that
+      // regardless of which of the site's several listing-tile shapes
+      // matched, rather than hardcoding a container selector per shape.
+      const link = title && title.closest('a');
+      return (link && link.parentElement) || card;
     }
   },
   product: {
