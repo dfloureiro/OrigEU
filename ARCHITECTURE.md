@@ -72,6 +72,7 @@ out of date", not "every EU country looks non-EU".
 | tienda.mercadona.es | Custom React SPA (confirmed) | Standalone adapter (`content/sites/mercadona.js`) |
 | carrefour.es | Custom Vue SPA (confirmed) | Standalone adapter (`content/sites/carrefour-es.js`) |
 | carrefour.fr | Custom Vue SPA, unrelated markup to .es (confirmed) | Standalone adapter (`content/sites/carrefour-fr.js`) |
+| rewe.de | Custom server-rendered platform behind a Cloudflare challenge (confirmed) | Standalone adapter (`content/sites/rewe.js`) |
 
 All three run on Salesforce Commerce Cloud (SFRA) — Pingo Doce couldn't be
 fingerprinted remotely early on (it 403s requests without a real
@@ -266,6 +267,36 @@ screen, re-checked on every scan (`content/common.js`'s scan loop already
 re-runs on every DOM mutation and every 2s) so a window resize across the
 breakpoint gets picked up too.
 
+rewe.de sits behind the same kind of Cloudflare bot-management challenge as
+the two carrefour.* sites, so `content/sites/rewe.js`'s selectors also come
+from user-supplied DevTools markup rather than a fetchable response. Its
+listing tile wraps the title `<h4>` in a clickable `<a>` exactly like
+carrefour.fr's shapes, so `getInjectTarget` uses the same `.closest('a')`
+→ parent generalization for its fallback path. It's a uniform grid tile,
+the same shape that pushed the add-to-cart button out of view on
+mercadona.es and carrefour.es after shipping a plain in-flow badge —
+rather than wait for that same bug report a third time, the badge is
+overlaid on the tile's image area (absolute-positioned, top-left) from the
+start, mirroring carrefour.es's `.product-card__media` fix and its
+left-aligned corner choice to stay clear of the tile's own top-right "add
+to favourites" heart button. One further wrinkle turned up when trying to
+verify a second card shape: this tile component gets reused for the
+search-suggestions typeahead flyout too (`data-theme="line-item-responsive"`
+vs. the grid's `data-theme="tile-responsive"`), structurally identical but
+with every part rendering its *own* CSS Modules hash suffix per theme
+variant — e.g. `a-pt__product-tile__container_mbaovz` on the grid tile vs.
+`a-pt__product-tile__container_-0VeKe` on the exact same role in the
+flyout. Hardcoding either hash would silently miss the other and break
+again on the next rebuild's hash rotation, so every selector in
+`content/sites/rewe.js` (and the matching CSS in `content/common.css`)
+matches on the stable `a-pt__product-tile__<part>_` prefix via a substring
+attribute selector (`[class*="..."]`) instead of an exact class name. The
+PDP (`#pdpr-ProductInformation` / `h1.pdpr-Title`) uses plain, unhashed BEM
+classes from a different component, and is a plain content panel rather
+than a fixed-height card, so it uses the ordinary after-`<h1>` placement
+instead of an overlay — same as auchan.fr and carrefour.fr's product
+pages.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -281,11 +312,12 @@ current markup (retailers restyle their sites over time).
    `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan (.pt) use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
    (`content/sites/pingodoce.js`). intermarche.pt, auchan.fr,
-   tienda.mercadona.es, carrefour.es, and carrefour.fr don't use that
-   shared file at all — their selectors live directly in
+   tienda.mercadona.es, carrefour.es, carrefour.fr, and rewe.de don't use
+   that shared file at all — their selectors live directly in
    `content/sites/intermarche.js`, `content/sites/auchan-fr.js`,
-   `content/sites/mercadona.js`, `content/sites/carrefour-es.js`, and
-   `content/sites/carrefour-fr.js` respectively
+   `content/sites/mercadona.js`, `content/sites/carrefour-es.js`,
+   `content/sites/carrefour-fr.js`, and `content/sites/rewe.js`
+   respectively
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
 ## Project layout
@@ -319,6 +351,7 @@ content/sites/auchan-fr.js       # standalone adapter — different platform fro
 content/sites/mercadona.js       # standalone adapter — client-rendered React SPA
 content/sites/carrefour-es.js    # standalone adapter — client-rendered Vue SPA
 content/sites/carrefour-fr.js    # standalone adapter — unrelated markup to carrefour-es.js
+content/sites/rewe.js            # standalone adapter — behind a Cloudflare challenge, uniform grid tiles
 backend/                         # own brand database: Cloudflare Workers + D1 + backoffice (see backend/README.md)
 ```
 

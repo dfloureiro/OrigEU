@@ -29,6 +29,7 @@
     "https://tienda.mercadona.es/*",
     "https://www.carrefour.es/*",
     "https://www.carrefour.fr/*",
+    "https://www.rewe.de/*",
     "https://*.workers.dev/*"
   ],
   "background": {
@@ -81,6 +82,12 @@
     {
       "matches": ["https://www.carrefour.fr/*"],
       "js": ["content/countries.js", "content/common.js", "content/sites/carrefour-fr.js"],
+      "css": ["content/common.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.rewe.de/*"],
+      "js": ["content/countries.js", "content/common.js", "content/sites/rewe.js"],
       "css": ["content/common.css"],
       "run_at": "document_idle"
     }

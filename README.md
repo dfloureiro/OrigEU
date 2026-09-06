@@ -45,6 +45,7 @@ full text shown above and a compact flag-only style.
 | 🇵🇹 Portugal | continente.pt, auchan.pt, pingodoce.pt, intermarche.pt |
 | 🇪🇸 Spain | mercadona.es (tienda.mercadona.es), carrefour.es |
 | 🇫🇷 France | auchan.fr, carrefour.fr |
+| 🇩🇪 Germany | rewe.de |
 
 Same retailer, different country, doesn't mean the same website —
 Continente/Auchan/Pingo Doce (all three Portuguese) happen to share a
@@ -91,8 +92,8 @@ Firefox:
   [addons.mozilla.org](https://addons.mozilla.org))
 
 Then visit continente.pt, auchan.pt, auchan.fr, pingodoce.pt,
-intermarche.pt, tienda.mercadona.es, carrefour.es, or carrefour.fr and
-search for a product.
+intermarche.pt, tienda.mercadona.es, carrefour.es, carrefour.fr, or
+rewe.de and search for a product.
 
 > **Why two manifests?** Chrome's Manifest V3 validator rejects
 > `background.scripts` outright, while Firefox's Manifest V3 support

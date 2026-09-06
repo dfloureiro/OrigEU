@@ -180,6 +180,46 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* rewe.de's listing tile (content/sites/rewe.js) is a uniform grid card
+   of the same shape that pushed the add-to-cart button out of view on
+   mercadona.es and carrefour.es — so the badge is overlaid on .image-area
+   from the start rather than left in flow, pre-empting that bug rather
+   than waiting for a report. Anchored bottom-left, out of the way of the
+   "Tiefpreis"-style promo ribbon some tiles show top-left and the tile's
+   own "add to favourites" heart button top-right.
+   Matched by attribute substring, not an exact class, because rewe.de's
+   CSS Modules give each theme variant of this component (grid tile vs.
+   the search-suggestions flyout, at least) its own hash suffix on an
+   otherwise identical "a-pt__product-tile__image-area_<hash>" class —
+   content/sites/rewe.js's selectors use the same substring-match
+   approach. */
+[class*="a-pt__product-tile__image-area_"] {
+  position: relative;
+}
+/* Unlike the other overlay rules on this page, max-width isn't tied to the
+   image column's own width (calc(100% - Npx)) — the search-suggestions
+   flyout variant of this tile renders its image noticeably narrower than
+   the grid tile does, and capping the badge to that width truncated it
+   down to just "OrigEU ❤️…" with the country cut off entirely. .image-area
+   has no overflow:hidden, so a wider absolutely-positioned badge is free
+   to spill a little past the image's own right edge into the gutter
+   before the title column starts, without affecting layout or covering
+   the title text. */
+[class*="a-pt__product-tile__image-area_"] > .origeu-badges {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  max-width: 170px;
+  margin: 0 !important;
+  z-index: 2;
+}
+[class*="a-pt__product-tile__image-area_"] > .origeu-badges .origeu-pill {
+  padding: 3px 8px;
+  font-size: 11px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
 /* Mercadona's product-detail modal pins its "Añadir al carro" button to the
    bottom of a fixed-height right-hand column (matched to the image
    gallery's height on the left) — same "no slack for extra content"
