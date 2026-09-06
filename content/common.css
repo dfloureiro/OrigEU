@@ -132,14 +132,18 @@
    title block — so content/sites/carrefour-es.js injects into
    .product-card__media (the image wrapper) instead, overlaid here rather
    than left in the flow, to avoid the same push-the-button-down bug before
-   it ever shipped. */
+   it ever shipped. Anchored to the top-*left* corner, unlike the other
+   overlay rules on this page — .product-card__header (a sibling of
+   .product-card__media, sitting on top of it) carries the card's own
+   "add to favourites" heart icon in the top-right corner, and a top-right
+   badge here landed right on top of it. */
 .product-card__media {
   position: relative;
 }
 .product-card__media > .origeu-badges {
   position: absolute;
   top: 4px;
-  right: 4px;
+  left: 4px;
   max-width: calc(100% - 8px);
   margin: 0 !important;
   z-index: 2;
