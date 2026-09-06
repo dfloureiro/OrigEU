@@ -4,12 +4,15 @@
 // (cf-mitigated: challenge), so these selectors are taken from real markup
 // copied out of a live browser's DevTools instead.
 //
-// Listing tile — the same component (.product-card-vertical-grid-new) is
-// reused for the sponsored slot at the top of results, the "Vous pourriez
-// aussi aimer"/"Nos clients ont également acheté" carousels, and — per the
-// "product-list-card-plp-grid-new__per-unit-label" class nested inside its
-// price block — the actual search-results grid too:
-//   <article class="... product-card-vertical-grid-new">
+// Listing tile — the site actually ships *two* differently-prefixed but
+// near-identically-shaped components: .product-card-vertical-grid-new
+// (verified first, from the sponsored slot at the top of results and the
+// "Vous pourriez aussi aimer"/"Nos clients ont également acheté"
+// carousels — a guess that this same class also covered the real
+// search-results grid turned out to be wrong) and
+// .product-list-card-plp-grid-new (the real search-results grid, verified
+// separately once that guess was caught):
+//   <article class="... product-card-vertical-grid-new">    <!-- carousels/sponsored -->
 //     <div class="product-card-vertical-grid-new__body">
 //       <div class="product-card-vertical-grid-new__image">...</div>
 //       <div class="product-card-vertical-grid-new__container">
@@ -32,15 +35,37 @@
 //       </div>
 //     </div>
 //   </article>
+//
+//   <article class="product-list-card-plp-grid-new">          <!-- real search grid -->
+//     <div class="product-list-card-plp-grid-new__body">
+//       <div class="product-list-card-plp-grid-new__image">...</div>
+//       <div class="product-list-card-plp-grid-new__right-section">
+//         <div class="product-list-card-plp-grid-new__infos">
+//           <a class="... product-list-card-plp-grid-new__title-container ...">
+//             <span class="c-link ... c-link--bold"> DODOT </span>
+//             <p class="... product-card-title__text ...">
+//               Couches Dodot Etapas 4 78 Unités DODOT
+//             </p>
+//           </a>
+//         </div>
+//         ...price, seller info, buy/"Voir" cta...
+//       </div>
+//     </div>
+//   </article>
+// The inner pieces that matter here are identical between the two —
+// .product-card-title__text for the name, an "__infos" sub-container
+// holding just the title (and, on the carousel variant, a reviews link) —
+// only the outer BEM prefix and the exact nesting of .right-section
+// differ, so a single name getter and a two-selector-list inject target
+// cover both without needing to branch on which shape matched.
 // Every example checked has the brand folded into the title text itself
 // too, redundantly with the separate brand <span> (e.g. "...FEBREZE",
-// "...CARREFOUR ESSENTIAL") — no brand-folding needed, unlike
-// pingodoce.js/intermarche.js. The buy button lives inside .body, in a
-// completely separate branch from .right-section (the title) — unlike
-// carrefour-es.js's two tile shapes, there's no shared fixed-height column
-// between them here, so no overlay trick is needed to avoid pushing
-// anything out of view.
-const LISTING_CARD_SELECTOR = '.product-card-vertical-grid-new';
+// "...DODOT") — no brand-folding needed, unlike pingodoce.js/intermarche.js.
+// The buy/"Voir" button lives outside .infos in both shapes, so there's no
+// shared fixed-height column risking the same "button pushed out of view"
+// bug carrefour-es.js hit — no overlay trick needed here.
+const LISTING_CARD_SELECTOR = '.product-card-vertical-grid-new, .product-list-card-plp-grid-new';
+const INFOS_SELECTOR = '.product-card-vertical-grid-new__infos, .product-list-card-plp-grid-new__infos';
 
 function listingName(card) {
   const el = card.querySelector('.product-card-title__text');
@@ -51,12 +76,12 @@ OrigEU.init({
   listing: {
     cardSelector: LISTING_CARD_SELECTOR,
     getName: listingName,
-    // .infos holds the title <a> and a separate reviews <a> as siblings —
-    // appending here lands the badge outside both anchors (inside either
-    // one would also navigate to the PDP on badge click, breaking the
-    // "unknown brand" click-to-suggest behavior).
+    // .infos holds the title <a> (and, on the carousel variant, a separate
+    // reviews <a>) — appending here lands the badge outside those anchors
+    // (inside one would also navigate to the PDP on badge click, breaking
+    // the "unknown brand" click-to-suggest behavior).
     getInjectTarget(card) {
-      return card.querySelector('.product-card-vertical-grid-new__infos') || card;
+      return card.querySelector(INFOS_SELECTOR) || card;
     }
   },
   product: {

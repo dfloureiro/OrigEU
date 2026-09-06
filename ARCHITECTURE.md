@@ -230,17 +230,24 @@ carrefour.fr is a genuinely different site from carrefour.es — same
 Cloudflare bot-management challenge blocking a plain fetch, but completely
 unrelated markup underneath, confirming Carrefour doesn't share a platform
 across countries any more than Auchan does.
-`content/sites/carrefour-fr.js`'s single listing-tile component
-(`.product-card-vertical-grid-new`) is reused for the sponsored slot, two
-different recommendation carousels, and (per a `product-list-card-plp-grid-
-new__per-unit-label` class nested in its price block) the real
-search-results grid too — one selector covers all of them. Its title text
-also redundantly folds the brand in at the *end* (e.g. "...FEBREZE",
-"...CARREFOUR ESSENTIAL"), same as carrefour.es, so no brand-folding logic
-needed; and unlike carrefour.es's two tile shapes, its buy button lives in
-a completely separate DOM branch from the title, so there's no shared
-fixed-height column risking the same "button pushed out of view" bug —
-plain placement is enough. The PDP is the interesting part: its `<h1>` is
+`content/sites/carrefour-fr.js` initially assumed one listing-tile
+component (`.product-card-vertical-grid-new`, verified from the sponsored
+slot and two recommendation carousels) also covered the real
+search-results grid, based on a class name (`product-list-card-plp-grid-
+new__per-unit-label`) glimpsed nested inside it — that guess was wrong. The
+real grid uses a second, differently-prefixed component
+(`.product-list-card-plp-grid-new`) that's near-identical on the inside
+(same `.product-card-title__text` for the name, same shape `__infos`
+sub-container) but not textually the same class, so both are matched
+(`cardSelector` lists both; the `__infos` inject-target lookup does too) —
+a lesson to actually verify a second card shape exists rather than infer
+it from a stray class name. Every example's title text redundantly folds
+the brand in at the *end* too (e.g. "...FEBREZE", "...DODOT"), same as
+carrefour.es, so no brand-folding logic needed either; and the buy/"Voir"
+button lives in a completely separate DOM branch from `.infos` in both
+shapes, so there's no shared fixed-height column risking the same "button
+pushed out of view" bug — plain placement is enough. The PDP is the
+interesting part: its `<h1>` is
 rendered *twice*, once in a mobile-only block and once in a desktop-only
 one, toggled by a CSS media query rather than by JS, so picking the first
 DOM match would badge whichever copy happens to be hidden at the current
