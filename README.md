@@ -43,7 +43,7 @@ full text shown above and a compact flag-only style.
 | Country | Sites |
 |---|---|
 | 🇵🇹 Portugal | continente.pt, auchan.pt, pingodoce.pt, intermarche.pt |
-| 🇪🇸 Spain | mercadona.es (tienda.mercadona.es), carrefour.es |
+| 🇪🇸 Spain | mercadona.es (tienda.mercadona.es), carrefour.es, alcampo.es (compraonline.alcampo.es) |
 | 🇫🇷 France | auchan.fr, carrefour.fr |
 | 🇩🇪 Germany | rewe.de |
 
@@ -92,8 +92,8 @@ Firefox:
   [addons.mozilla.org](https://addons.mozilla.org))
 
 Then visit continente.pt, auchan.pt, auchan.fr, pingodoce.pt,
-intermarche.pt, tienda.mercadona.es, carrefour.es, carrefour.fr, or
-rewe.de and search for a product.
+intermarche.pt, tienda.mercadona.es, carrefour.es, carrefour.fr, rewe.de,
+or compraonline.alcampo.es and search for a product.
 
 > **Why two manifests?** Chrome's Manifest V3 validator rejects
 > `background.scripts` outright, while Firefox's Manifest V3 support

@@ -38,6 +38,7 @@
     "https://www.carrefour.es/*",
     "https://www.carrefour.fr/*",
     "https://www.rewe.de/*",
+    "https://www.compraonline.alcampo.es/*",
     "https://*.workers.dev/*"
   ],
   "background": {
@@ -96,6 +97,12 @@
     {
       "matches": ["https://www.rewe.de/*"],
       "js": ["content/countries.js", "content/common.js", "content/sites/rewe.js"],
+      "css": ["content/common.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.compraonline.alcampo.es/*"],
+      "js": ["content/countries.js", "content/common.js", "content/sites/alcampo.js"],
       "css": ["content/common.css"],
       "run_at": "document_idle"
     }

@@ -1,11 +1,11 @@
 # Privacy Policy — OrigEU
 
-_Last updated: 2026-09-06_
+_Last updated: 2026-09-07_
 
 OrigEU is a browser extension that shows the country of origin of
 supermarket products, directly on Continente, Auchan, Pingo Doce,
-Intermarché, Mercadona, Carrefour, and REWE's websites. This page explains
-what the extension does and does not do with your data.
+Intermarché, Mercadona, Carrefour, REWE, and Alcampo's websites. This page
+explains what the extension does and does not do with your data.
 
 ## Short version
 
@@ -16,12 +16,12 @@ non-personal data. Nothing you browse or buy is ever sent anywhere.
 ## What the extension reads
 
 On continente.pt, auchan.pt, auchan.fr, pingodoce.pt, intermarche.pt,
-tienda.mercadona.es, carrefour.es, carrefour.fr, and rewe.de, the
-extension's content script reads the product name text already visible on
-the page — the same text you can see yourself — to check it against a
-local database of brands. This check happens entirely inside your
-browser. The product name
-is never sent to our server, to us, or to anyone else.
+tienda.mercadona.es, carrefour.es, carrefour.fr, rewe.de, and
+compraonline.alcampo.es, the extension's content script reads the product
+name text already visible on the page — the same text you can see
+yourself — to check it against a local database of brands. This check
+happens entirely inside your browser. The product name is never sent to
+our server, to us, or to anyone else.
 
 ## What gets sent over the network, and why
 
@@ -69,7 +69,8 @@ The extension requests:
 - **`storage`** — for the local preferences/cache described above.
 - **Host access to continente.pt, auchan.pt, auchan.fr, pingodoce.pt,
   intermarche.pt, tienda.mercadona.es, carrefour.es, carrefour.fr,
-  rewe.de** — to inject the badge into those sites' pages.
+  rewe.de, compraonline.alcampo.es** — to inject the badge into those
+  sites' pages.
 - **Host access to `*.workers.dev`** — to fetch the public brand database
   from our own Cloudflare Worker.
 

@@ -460,3 +460,34 @@
 .origeu-suggest__country-confirm--unknown {
   color: #a3261f;
 }
+
+/* compraonline.alcampo.es's grid tile (content/sites/alcampo.js) has the
+   same fixed-height-column shape that pushed the add-to-cart button out
+   of view on mercadona.es, carrefour.es, and rewe.de — so the badge is
+   overlaid on .image-container from the start rather than left in flow.
+   .image-container already has position: relative in the site's own CSS,
+   but that's declared here too rather than relied on, in case the exact
+   class this is scoped under changes. z-index is set explicitly (unlike
+   the plain z-index: 2 most of the other overlay rules on this page use)
+   because .image-container also holds an invisible, aria-hidden="true"
+   duplicate link stacked in the same space (a screen-reader click target
+   alongside the real, focusable title link) — the same "stretched link"
+   shape that silently ate badge clicks on e.leclerc, so this heads it off
+   from the start instead of waiting for that bug report a third time. */
+.image-container {
+  position: relative;
+}
+.image-container > .origeu-badges {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  max-width: calc(100% - 8px);
+  margin: 0 !important;
+  z-index: 5;
+}
+.image-container > .origeu-badges .origeu-pill {
+  padding: 2px 7px;
+  font-size: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}

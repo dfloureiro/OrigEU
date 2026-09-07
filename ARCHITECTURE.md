@@ -73,6 +73,7 @@ out of date", not "every EU country looks non-EU".
 | carrefour.es | Custom Vue SPA (confirmed) | Standalone adapter (`content/sites/carrefour-es.js`) |
 | carrefour.fr | Custom Vue SPA, unrelated markup to .es (confirmed) | Standalone adapter (`content/sites/carrefour-fr.js`) |
 | rewe.de | Custom server-rendered platform behind a Cloudflare challenge (confirmed) | Standalone adapter (`content/sites/rewe.js`) |
+| compraonline.alcampo.es | Ocado Smart Platform, client-rendered (confirmed) | Standalone adapter (`content/sites/alcampo.js`) |
 
 All three run on Salesforce Commerce Cloud (SFRA) — Pingo Doce couldn't be
 fingerprinted remotely early on (it 403s requests without a real
@@ -297,6 +298,29 @@ than a fixed-height card, so it uses the ordinary after-`<h1>` placement
 instead of an overlay — same as auchan.fr and carrefour.fr's product
 pages.
 
+compraonline.alcampo.es is a plain client-rendered SPA — no bot-management
+response to point at, just an empty page until JS runs — but its own
+response headers gave away the platform before any markup was needed:
+`content-security-policy: frame-ancestors 'self' https://*.osp.tech`,
+`osp.tech` being Ocado Smart Platform, the grocery e-commerce stack Ocado
+licenses to retail partners internationally. That shows in the markup
+too: unlike most sites here, Ocado's own components use plain, stable
+`data-test="..."` attributes (`fop-title`, `fop-product-link`,
+`price-container`, ...) rather than hashed CSS-module classes, so
+`content/sites/alcampo.js`'s selectors lean on those instead of the
+(unhashed, but still styled-components-generated) class names sitting
+alongside them. The listing tile's image column contains an invisible,
+`aria-hidden="true"`, `tabindex="-1"` duplicate of the title link — a
+screen-reader click target stacked in the same space as the real one —
+which is the exact "stretched link" shape that silently swallowed badge
+clicks on e.leclerc before a z-index fix; rather than wait for that same
+bug report a third time, the badge overlay on `.image-container` (already
+`position: relative` in the site's own CSS, redeclared here regardless)
+ships with an explicit z-index from the start. The overlay itself exists
+for the usual reason too — this is another fixed-height grid tile, the
+same shape that pushed an add-to-cart button out of view on mercadona.es,
+carrefour.es, and rewe.de.
+
 ## If badges don't show up on a site
 
 This usually means the CSS selectors in the adapter don't match that site's
@@ -312,12 +336,12 @@ current markup (retailers restyle their sites over time).
    `tileBodySelector`, `pdpNameSelectors`); Continente/Auchan (.pt) use its
    defaults as-is, Pingo Doce passes overrides for the two that differ
    (`content/sites/pingodoce.js`). intermarche.pt, auchan.fr,
-   tienda.mercadona.es, carrefour.es, carrefour.fr, and rewe.de don't use
-   that shared file at all — their selectors live directly in
-   `content/sites/intermarche.js`, `content/sites/auchan-fr.js`,
-   `content/sites/mercadona.js`, `content/sites/carrefour-es.js`,
-   `content/sites/carrefour-fr.js`, and `content/sites/rewe.js`
-   respectively
+   tienda.mercadona.es, carrefour.es, carrefour.fr, rewe.de, and
+   compraonline.alcampo.es don't use that shared file at all — their
+   selectors live directly in `content/sites/intermarche.js`,
+   `content/sites/auchan-fr.js`, `content/sites/mercadona.js`,
+   `content/sites/carrefour-es.js`, `content/sites/carrefour-fr.js`,
+   `content/sites/rewe.js`, and `content/sites/alcampo.js` respectively
 5. Reload the extension (⟳ icon on `chrome://extensions`) and refresh the page
 
 ## Project layout
@@ -352,6 +376,7 @@ content/sites/mercadona.js       # standalone adapter — client-rendered React 
 content/sites/carrefour-es.js    # standalone adapter — client-rendered Vue SPA
 content/sites/carrefour-fr.js    # standalone adapter — unrelated markup to carrefour-es.js
 content/sites/rewe.js            # standalone adapter — behind a Cloudflare challenge, uniform grid tiles
+content/sites/alcampo.js         # standalone adapter — Ocado Smart Platform, client-rendered
 backend/                         # own brand database: Cloudflare Workers + D1 + backoffice (see backend/README.md)
 ```
 
