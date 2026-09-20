@@ -17,7 +17,7 @@ Work from the current repository state. Read `ARCHITECTURE.md` (especially **Sit
 
 - Add `content/sites/<site>.js` using `OrigEU.init(...)`; use `OrigEUSfcc.buildConfig(...)` only when the storefront is confirmed to use compatible Salesforce Commerce Cloud markup. Keep site-specific selectors and behavior in the site adapter. Change shared code or CSS only for behavior genuinely shared across sites.
 - Add the exact HTTPS match patterns, script order, and `content/common.css` to `content_scripts` in **both** `manifest.json` and `manifest.firefox.json`. The script order is `content/countries.js`, `content/common.js`, optional `content/sites/sfcc-common.js`, then the site adapter. Add only the host permissions needed for the new site. Preserve the browsers' distinct `background` blocks and Firefox's `browser_specific_settings`.
-- Update the supported-sites table and setup example in `README.md`, plus the site notes and file map in `ARCHITECTURE.md`. Brand origin records are managed through the backend; adding a site does not imply populating that database.
+- Update the supported-sites table and setup example in `README.md`, plus the site notes and file map in `ARCHITECTURE.md`. Review `extDescription` in every `_locales/*/messages.json`: name relevant supported supermarkets in their country-language descriptions, and use generic wording for locales without a relevant supported supermarket. Brand origin records are managed through the backend; adding a site does not imply populating that database.
 
 ## Verify
 

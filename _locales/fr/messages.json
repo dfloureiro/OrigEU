@@ -3,7 +3,7 @@
     "message": "OrigEU — Origine UE"
   },
   "extDescription": {
-    "message": "Indique si un produit est d'origine UE (ou AELE) sur Continente, Pingo Doce, Auchan et Intermarché."
+    "message": "Indique l'origine des marques (UE, AELE ou autres pays) sur Auchan et Carrefour en France."
   },
 
   "popupSubtitle": {

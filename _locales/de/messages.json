@@ -3,7 +3,7 @@
     "message": "OrigEU — EU-Herkunft"
   },
   "extDescription": {
-    "message": "Zeigt, ob ein Produkt aus der EU (oder EFTA) stammt, bei Continente, Pingo Doce, Auchan und Intermarché."
+    "message": "Zeigt die Herkunft von Marken (EU, EFTA oder andere Länder) bei REWE an."
   },
 
   "popupSubtitle": {

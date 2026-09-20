@@ -3,7 +3,7 @@
     "message": "OrigEU — Origen UE"
   },
   "extDescription": {
-    "message": "Muestra si un producto es de origen UE (o EFTA) en Continente, Pingo Doce, Auchan e Intermarché."
+    "message": "Muestra el origen de las marcas (UE, EFTA u otros países) en Mercadona, Carrefour y Alcampo."
   },
 
   "popupSubtitle": {
