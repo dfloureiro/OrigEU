@@ -1,0 +1,24 @@
+OrigEU zeigt beim Online-Einkauf das erfasste Herkunftsland einer Produktmarke an. Herkunftskennzeichen erscheinen in Produktlisten und Detailansichten, auf einigen Websites auch in den Suchvorschlägen.
+
+UNTERSTÜTZTE WEBSITES
+
+OrigEU funktioniert in unterstützten Online-Supermärkten. Die Erweiterung wird nur auf kompatiblen Einkaufsseiten ausgeführt, die in ihren Berechtigungen angegeben sind.
+
+BEDEUTUNG DER KENNZEICHEN
+
+- EU: Die Marke ist einem Land der Europäischen Union zugeordnet.
+- EFTA: Die Marke ist der Schweiz, Norwegen, Island oder Liechtenstein zugeordnet.
+- Anderes Land: Die Marke ist einem Land außerhalb der EU und der EFTA zugeordnet.
+- Herkunft unbekannt: Die Marke ist noch nicht in der Datenbank erfasst.
+
+Klicken Sie auf ein Kennzeichen, um die Quelle aufzurufen, sofern eine hinterlegt ist. Fehlende Marken und Korrekturen können Sie direkt auf der Seite vorschlagen. Über das Symbol in der Symbolleiste lassen sich Kennzeichen ein- und ausblenden, Kennzeichen mit unbekannter Herkunft verbergen und eine lange, mittlere oder kompakte Darstellung wählen. Die optionale Einstellung "unBrexit" ändert nur die Anzeige britischer Marken; die gespeicherten Daten bleiben unverändert.
+
+OrigEU ist auf Deutsch, Englisch, europäischem Portugiesisch, Spanisch, Französisch und Italienisch verfügbar.
+
+EINSCHRÄNKUNGEN
+
+Die Herkunft wird für Marken erfasst, nicht für einzelne Produkte. Ein Produkt kann anderswo hergestellt worden sein oder regionalen beziehungsweise lizenzrechtlichen Ausnahmen unterliegen. OrigEU ist eine Orientierungshilfe und keine amtliche Herkunftszertifizierung.
+
+DATENSCHUTZ
+
+Es gibt keine Analysewerkzeuge, Werbung oder Kontopflicht. Produktnamen werden lokal im Browser abgeglichen und nicht automatisch übertragen. Die Erweiterung lädt öffentliche Marken- und Länderdaten herunter. Ein Vorschlag wird nur gesendet, wenn Sie ihn selbst abschicken.

@@ -1,0 +1,24 @@
+OrigEU shows the recorded country of origin of a product's brand while you shop online. Origin badges appear in product listings and detail views, and on some sites in search suggestions.
+
+WHERE IT WORKS
+
+OrigEU works on supported online supermarkets. The extension only runs on compatible shopping sites declared in its permissions.
+
+WHAT THE BADGES MEAN
+
+- EU: the brand is associated with a European Union country.
+- EFTA: the brand is associated with Switzerland, Norway, Iceland or Liechtenstein.
+- Other country: the brand is associated with a country outside the EU and EFTA.
+- Unknown origin: the brand is not yet in the database.
+
+Click a badge to view its source, when one has been recorded. You can suggest a missing brand or a correction without leaving the page. The toolbar lets you show or hide badges, hide unknown-origin badges, and choose a long, medium or compact style. An optional "unBrexit" setting changes how UK badges are displayed; it does not change the recorded data.
+
+OrigEU is available in English, European Portuguese, German, Spanish, French and Italian.
+
+LIMITATIONS
+
+Origin data is recorded at brand level, not for individual products. A product may be manufactured elsewhere or have a regional or licensing exception. OrigEU is a guide, not an official origin certification.
+
+PRIVACY
+
+No analytics, ads or account are required. Product names are matched locally in your browser and are not sent automatically. The extension downloads public brand and country data; it sends a suggestion only when you choose to submit one.

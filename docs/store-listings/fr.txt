@@ -1,0 +1,24 @@
+OrigEU affiche le pays d'origine enregistré pour la marque d'un produit pendant vos achats en ligne. Les badges d'origine apparaissent dans les listes et les fiches produit et, sur certains sites, dans les suggestions de recherche.
+
+SITES COMPATIBLES
+
+OrigEU fonctionne sur des supermarchés en ligne compatibles. L'extension ne s'exécute que sur les sites marchands compatibles indiqués dans ses autorisations.
+
+SIGNIFICATION DES BADGES
+
+- UE : La marque est associée à un pays de l'Union européenne.
+- AELE : La marque est associée à la Suisse, à la Norvège, à l'Islande ou au Liechtenstein.
+- Autre pays : La marque est associée à un pays hors de l'UE et de l'AELE.
+- Origine inconnue : La marque ne figure pas encore dans la base de données.
+
+Cliquez sur un badge pour consulter sa source, lorsqu'une source est enregistrée. Vous pouvez suggérer une marque manquante ou une correction sans quitter la page. L'icône de la barre d'outils permet d'afficher ou de masquer les badges, de masquer ceux dont l'origine est inconnue et de choisir un format long, moyen ou compact. L'option "unBrexit" ne change que l'affichage des marques britanniques ; elle ne modifie pas les données enregistrées.
+
+OrigEU est disponible en français, anglais, portugais européen, allemand, espagnol et italien.
+
+LIMITES
+
+L'origine est enregistrée pour la marque, pas pour chaque produit. Un produit peut être fabriqué ailleurs ou faire l'objet d'une exception régionale ou liée à une licence. OrigEU est une aide au choix, pas une certification officielle d'origine.
+
+CONFIDENTIALITÉ
+
+Aucun compte n'est nécessaire ; il n'y a ni publicité ni outil d'analyse. Les noms des produits sont comparés localement dans votre navigateur et ne sont pas envoyés automatiquement. L'extension télécharge des données publiques sur les marques et les pays ; elle n'envoie une suggestion que si vous décidez de la soumettre.

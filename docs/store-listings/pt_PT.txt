@@ -1,0 +1,24 @@
+O OrigEU mostra o país de origem registado para a marca de um produto enquanto faz compras online. Os selos de origem aparecem nas listas de produtos e nas páginas de detalhe e, em alguns sites, nas sugestões de pesquisa.
+
+ONDE FUNCIONA
+
+O OrigEU funciona em supermercados online compatíveis. A extensão só é executada nos sites de compras compatíveis indicados nas respetivas permissões.
+
+O QUE SIGNIFICAM OS SELOS
+
+- UE: a marca está associada a um país da União Europeia.
+- EFTA: a marca está associada à Suíça, Noruega, Islândia ou Liechtenstein.
+- Outro país: a marca está associada a um país fora da UE e da EFTA.
+- Origem desconhecida: a marca ainda não consta da base de dados.
+
+Clique num selo para consultar a fonte, quando existir. Pode sugerir uma marca em falta ou uma correção sem sair da página. Na barra de ferramentas, pode mostrar ou ocultar os selos, ocultar os de origem desconhecida e escolher o formato longo, médio ou compacto. A opção "unBrexit" altera apenas a apresentação dos selos do Reino Unido; não modifica os dados registados.
+
+O OrigEU está disponível em português europeu, inglês, alemão, espanhol, francês e italiano.
+
+LIMITAÇÕES
+
+A origem é registada por marca, não por produto. Um produto pode ser fabricado noutro país ou estar sujeito a uma exceção regional ou de licenciamento. O OrigEU é uma ajuda à escolha, não uma certificação oficial de origem.
+
+PRIVACIDADE
+
+Não são necessários conta, anúncios nem ferramentas de análise. Os nomes dos produtos são comparados localmente no seu navegador e não são enviados automaticamente. A extensão descarrega dados públicos sobre marcas e países; só envia uma sugestão se decidir submetê-la.

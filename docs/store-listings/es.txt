@@ -1,0 +1,24 @@
+OrigEU muestra el país de origen registrado de la marca de un producto mientras compras en línea. Los distintivos de origen aparecen en los listados y las vistas de detalle y, en algunas tiendas, en las sugerencias de búsqueda.
+
+DÓNDE FUNCIONA
+
+OrigEU funciona en supermercados en línea compatibles. La extensión solo se ejecuta en los sitios de compra compatibles indicados en sus permisos.
+
+QUÉ SIGNIFICAN LOS DISTINTIVOS
+
+- UE: La marca está asociada a un país de la Unión Europea.
+- EFTA: La marca está asociada a Suiza, Noruega, Islandia o Liechtenstein.
+- Otro país: La marca está asociada a un país fuera de la UE y de la EFTA.
+- Origen desconocido: La marca aún no figura en la base de datos.
+
+Haz clic en un distintivo para consultar su fuente, si se ha registrado alguna. Puedes sugerir una marca que falta o una corrección sin salir de la página. El icono de la barra de herramientas permite mostrar u ocultar los distintivos, ocultar los de origen desconocido y elegir un formato largo, medio o compacto. La opción "unBrexit" solo cambia cómo se muestran las marcas del Reino Unido; no modifica los datos registrados.
+
+OrigEU está disponible en español, inglés, portugués europeo, alemán, francés e italiano.
+
+LIMITACIONES
+
+El origen se registra por marca, no por producto individual. Un producto puede fabricarse en otro país o tener excepciones regionales o de licencia. OrigEU es una ayuda para orientarte, no una certificación oficial de origen.
+
+PRIVACIDAD
+
+No se necesitan cuentas y no hay analítica ni anuncios. Los nombres de los productos se comparan localmente en tu navegador y no se envían automáticamente. La extensión descarga datos públicos sobre marcas y países; solo envía una sugerencia si decides remitirla.
